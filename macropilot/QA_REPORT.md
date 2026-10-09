@@ -218,3 +218,17 @@
 - **自動テスト**：`official-foods.test.js` に上記8件の食品番号・出典URL・栄養値・未検証状態の個別アサーションを追加。件数期待値を34件（公式照合2＋二次情報32）へ更新。各更新commitのActionsを個別に追跡し、失敗があれば理由を記録して後続commitで修正する。
 - **未解決ゲート**：果物カバレッジはりんご1件にとどまる。バナナ・柑橘類、調味料、追加加工食品の拡張、公式CSVの実取得・解析、正誤表行単位照合、同一食品状態の複数出典比較、網羅性・大規模整合性QA、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未完了。MacroPilot MVPは**未完成**。
 - **保護境界**：変更先は `feature/macropilot-mvp` の `macropilot/official-foods.json`、`macropilot/official-foods.test.js`、`macropilot/QA_REPORT.md` のみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更していない。
+
+
+## 34件データ拡張後のCI追跡・Recovery完了（2026-10-10）
+- **指定された旧run**：`82bd9c5fcf8dbfbddb54f064471598b164ab3b99` の [Run #38000686148](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000686148) は `completed / success`。validateジョブと全step成功を確認。
+- **拡張中の失敗記録**：
+  - データ追加commit `443798c6474409d0f73ebeefb47a6a05fd16d493` の [Run #38001010200](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001010200) は旧期待件数26のため失敗（実データ34）。
+  - 推測値を根拠にしないためきな粉を除外したcommit `c71a0afaf0389cf0660c309bde80a53e6b3754e5` の [Run #38001036229](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001036229) は旧期待件数26のため失敗（実データ33）。
+  - りんご追加commit `283ef9642621b5d44f7564536e0114bf721f0afc` の [Run #38001075985](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001075985) は期待件数33の更新漏れで失敗（実データ34）。
+  - 上記は食品値の不一致ではなく、データ件数とテスト期待値の更新順による失敗。失敗履歴は保持。
+- **修正後PASS**：`official-foods.test.js` の期待値を34件（公式照合2＋二次情報32）へ更新したcommit `a39d85e64aa54397230ef4e4fea0a8cdfb96a03b` の [Run #38001090831](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001090831) は `completed / success`。JavaScript syntax、栄養・バックアップテスト、JSON検証、全後処理ステップ成功。
+- **QAレポートcommit CI PASS**：本レポート更新commit `18fd90002f367b23dd4f96657bc8ed1c58497e62` の [Run #38001106982](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001106982) は `completed / success`。validateジョブと全step成功。
+- **出典と値の確認範囲**：新規追加の各栄養値は出典ページに記載された100g値を記録。りんご（皮つき・生）は二次情報サイトSeibun!の100g表示を参照。きな粉は主要4値の出典表示を十分確認できなかったため、レコードを除外しており、現在の34件には含まれない。
+- **現在のデータ品質**：34件、公式個別ページ照合済み2件、二次情報のみ32件。二次情報32件は `SECONDARY_SOURCE_UNVERIFIED` のまま。独立した同一食品状態の複数出典照合は未実施であり、出典間競合が不存在とは結論しない。
+- **未解決ゲート**：果物はりんご1件のみで、バナナ・柑橘類の追加が必要。調味料の追加、公式CSV実取得・解析、正誤表行単位照合、同一食品状態の複数出典比較、網羅性・大規模整合性QA、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未完了。MacroPilot MVPは**未完成**。
