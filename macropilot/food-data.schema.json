@@ -71,7 +71,8 @@
             "OFFICIAL_PAGE_SECONDARY_MATCH",
             "OFFICIAL_PAGE_ONLY",
             "CSV_ROW_VERIFIED",
-            "SAMPLE_UNVERIFIED"
+            "SAMPLE_UNVERIFIED",
+            "SECONDARY_SOURCE_UNVERIFIED"
           ]
         },
         "edition": {
