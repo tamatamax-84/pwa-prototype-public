@@ -26,6 +26,16 @@ for (const food of foods) {
   if (foodNumbers.has(p.foodNumber)) throw new Error('duplicate food number: ' + p.foodNumber);
   foodNumbers.add(p.foodNumber);
 }
-const rice=foods.find(f=>f.id==='rice'); assert.ok(rice, 'rice record retained'); assert.equal(rice.provenance.foodNumber,'01088'); assert.equal(rice.nutrients.energyKcal,156); assert.equal(rice.nutrients.carbohydrateG,37.1);
-const chicken=foods.find(f=>f.id==='chicken'); assert.ok(chicken, 'chicken record retained'); assert.equal(chicken.provenance.foodNumber,'11288'); assert.equal(chicken.nutrients.energyKcal,177); assert.equal(chicken.nutrients.proteinG,38.8); assert.equal(chicken.nutrients.fatG,3.3);
-console.log('PASS: ' + foods.length + ' food records validated for unique IDs/numbers, per-100g nutrients, provenance, secondary checks, and errata status');
+const rice=foods.find(f=>f.id==='rice'); assert.ok(rice, 'rice record retained');
+assert.equal(rice.provenance.foodNumber,'01088'); assert.equal(rice.provenance.sourceUrl,'https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7');
+assert.match(rice.provenance.foodState,/炊飯後.*精白米.*うるち米/); assert.equal(rice.base,100);
+assert.deepEqual(rice.nutrients,{energyKcal:156,proteinG:2.5,carbohydrateG:37.1,fatG:0.3},'rice all registered nutrient values must match the official individual page');
+const chicken=foods.find(f=>f.id==='chicken'); assert.ok(chicken, 'chicken record retained');
+assert.equal(chicken.provenance.foodNumber,'11288'); assert.equal(chicken.provenance.sourceUrl,'https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=11_11288_7');
+assert.match(chicken.provenance.foodState,/若どり.*むね.*皮なし.*焼き/); assert.equal(chicken.base,100);
+assert.deepEqual(chicken.nutrients,{energyKcal:177,proteinG:38.8,carbohydrateG:0.1,fatG:3.3},'chicken all registered nutrient values must match the official individual page');
+for (const food of foods) {
+  assert.ok(food.provenance.status === 'OFFICIAL_PAGE_SECONDARY_MATCH' || food.provenance.status === 'OFFICIAL_PAGE_ONLY' || food.provenance.status === 'CSV_ROW_VERIFIED' || food.provenance.status === 'SAMPLE_UNVERIFIED', food.id + ': recognized evidence status');
+  if (food.provenance.errataStatus !== 'ROW_CHECKED' && food.provenance.errataStatus !== 'NOT_APPLICABLE') assert.notEqual(food.provenance.errataStatus,'ROW_CHECKED',food.id + ': errata must not be marked checked without row evidence');
+}
+console.log('PASS: ' + foods.length + ' food records validated for unique IDs/numbers, all registered nutrients for the two official-page-checked foods, provenance, secondary checks, and explicit errata status');
