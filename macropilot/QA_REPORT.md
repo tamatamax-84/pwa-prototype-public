@@ -127,3 +127,9 @@
 - **更新commitとCI**：公式食品照合テスト更新commit `432e266489021b162e18f8424c58624ff7e9378f`。栄養・バックアップテスト更新commit `b528873bb37d665ca8386968e7b03bc76ae919eb`。両commitのActions結果と、QAレポート更新commitのActions結果を別途追跡し、完了・成功するまでは今回の更新全体をCI PASSと判定しない。
 - **未解決**：CSV実取得・解析、2026年3月27日付正誤表の行単位照合、全食品データの網羅性・大規模整合性QA、iPhone実機Safari、ホーム画面追加、実機オフライン起動・復帰・再接続、HTTPS公開。MacroPilot MVPは未完成。
 - **保護境界**：コード更新先は feature/macropilot-mvp の macropilot/official-foods.test.js と macropilot/nutrition.test.js のみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更していない。
+## CI追跡更新（2026-10-10・QA拡張コミット）
+- **PASS**：公式食品照合テストcommit `432e266489021b162e18f8424c58624ff7e9378f` のGitHub Actions [Run #37970384585](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970384585) は `completed / success`。JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理を含む全ステップ成功。
+- **PASS**：栄養・バックアップ境界テストcommit `b528873bb37d665ca8386968e7b03bc76ae919eb` のGitHub Actions [Run #37970395238](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970395238) は `completed / success`。JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理を含む全ステップ成功。
+- **QAレポート更新commitのCI**：本追記の直前のレポート更新commit `f7a108476e3abe24048afbdb2954941563b26edc` のRun [#37970432894](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970432894) は最終確認時点で `in_progress`。JavaScript syntaxは成功、Nutrition and backup validation testsは実行中、JSON validationは未開始。ジョブログ取得は `BlobNotFound` で失敗し、ログ本文は確認できない。完了結果が得られるまでは当該レポート更新をCI PASSと扱わない。
+- **次の追跡対象**：本追記によって新しいcommitとActions runが作成されるため、当該更新commitのrunを別途追跡し、完了・結論を確認する。
+- **ゲート状況**：2食品の登録済み4栄養値は公式個別ページと一致し、該当する自動テストは成功。正誤表の行単位照合、CSV実取得、全食品網羅性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開は未解決。MacroPilot MVPは未完成。
