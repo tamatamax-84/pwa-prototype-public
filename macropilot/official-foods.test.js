@@ -79,6 +79,10 @@ const expectedSecondary = {
   bread_white: {number:'01026', energyKcal:248, proteinG:8.9, carbohydrateG:46.4, fatG:4.1, url:'https://diet.relifeinc.jp/food/01026/'},
   pancake_mix: {number:'01024', energyKcal:360, proteinG:7.8, carbohydrateG:74.4, fatG:4.0, url:'https://diet.relifeinc.jp/food/01024/'},
   spring_roll_wrapper_raw: {number:'01179', energyKcal:288, proteinG:8.3, carbohydrateG:62.2, fatG:1.6, url:'https://diet.relifeinc.jp/food/01179/'},
+  banana_raw: {number:'07107', energyKcal:93, proteinG:1.1, carbohydrateG:22.5, fatG:0.2, url:'https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1018&page=102'},
+  mandarin_orange_sajo_raw: {number:'07029', energyKcal:49, proteinG:0.7, carbohydrateG:11.5, fatG:0.1, url:'https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=920&page=92'},
+  soy_sauce_regular: {number:'17007', energyKcal:76, proteinG:7.7, carbohydrateG:7.9, fatG:0, url:'https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2343&page=235'},
+  rice_miso_light_salty: {number:'17045', energyKcal:182, proteinG:12.5, carbohydrateG:21.9, fatG:6.0, url:'https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2431&page=244'},
   apple_skin_raw: {number:'07176', energyKcal:56, proteinG:0.2, carbohydrateG:16.2, fatG:0.3, url:'https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1059&page=106'},
 };
 for (const [id, expected] of Object.entries(expectedSecondary)) {
@@ -91,5 +95,5 @@ for (const [id, expected] of Object.entries(expectedSecondary)) {
   assert.equal(food.provenance.errataStatus,'NOT_ROW_CHECKED');
   assert.equal(food.provenance.secondaryCheck,'NOT_CHECKED');
 }
-assert.equal(foods.length,34,'expected two official-page-checked records plus thirty-two secondary-source records');
+assert.equal(foods.length,38,'expected two official-page-checked records plus thirty-six secondary-source records');
 console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 32 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
