@@ -232,3 +232,17 @@
 - **出典と値の確認範囲**：新規追加の各栄養値は出典ページに記載された100g値を記録。りんご（皮つき・生）は二次情報サイトSeibun!の100g表示を参照。きな粉は主要4値の出典表示を十分確認できなかったため、レコードを除外しており、現在の34件には含まれない。
 - **現在のデータ品質**：34件、公式個別ページ照合済み2件、二次情報のみ32件。二次情報32件は `SECONDARY_SOURCE_UNVERIFIED` のまま。独立した同一食品状態の複数出典照合は未実施であり、出典間競合が不存在とは結論しない。
 - **未解決ゲート**：果物はりんご1件のみで、バナナ・柑橘類の追加が必要。調味料の追加、公式CSV実取得・解析、正誤表行単位照合、同一食品状態の複数出典比較、網羅性・大規模整合性QA、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未完了。MacroPilot MVPは**未完成**。
+
+
+## 38食品への拡張とCI追跡（2026-10-10）
+- **指定run最終確認**：QAレポート更新commit `c8ba5b4de4916640f8531c67ea3a440faf39fcb4` の [Run #38001182100](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001182100) は `completed / success`。validate job（ID `114059352956`）と全step（Set up job、Checkout、Setup Node.js、JavaScript syntax、Nutrition and backup validation tests、JSON validation、post setup-node、post checkout、Complete job）がすべて `completed / success`。
+- **追加食品4件**（すべて100gあたり、順序：kcal / たんぱく質g / 炭水化物g / 脂質g）：
+  - バナナ（生）07107：93 / 1.1 / 22.5 / 0.2。Seibun!の100g表示を参照。https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1018&page=102
+  - うんしゅうみかん（砂じょう・普通・生）07029：49 / 0.7 / 11.5 / 0.1。Seibun!の100g表示を参照。https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=920&page=92
+  - こいくちしょうゆ 17007：76 / 7.7 / 7.9 / 0.0。Seibun!の100g表示を参照。https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2343&page=235
+  - 米みそ（淡色辛みそ）17045：182 / 12.5 / 21.9 / 6.0。Seibun!の100g表示を参照。https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2431&page=244
+- **ステータス境界**：4件とも `SECONDARY_SOURCE_UNVERIFIED`、`secondaryCheck=NOT_CHECKED`、`errataStatus=NOT_ROW_CHECKED`。出典ページに明記された4栄養値のみ登録し、公式個別ページ照合済みとは扱っていない。
+- **件数とテスト**：データは38件（公式個別ページ照合済み2件＋未検証二次情報36件）。`official-foods.test.js` に4件それぞれの食品番号、URL、4栄養値、未検証状態を検査する期待値を追加し、総件数を38へ更新。データcommit `2ea2ac31b6034a1273deeb726eb0278a1ee1139f`、テストcommit `b64ce2a2acbedd813cced73c5f1a62380ebbda1c`。
+- **出典差異の扱い**：Seibun!では「うんしゅうみかん・砂じょう・早生」と「普通」は別の食品状態・食品番号として掲載され、値も異なるため、状態を混在させず普通の値のみ採用。これは同一食品状態の出典間矛盾と断定しない。今回、同一食品状態の独立した複数出典比較は未実施であり、競合値が不存在とは結論しない。
+- **未解決ゲート**：公式CSVの実取得・解析、2026-03-27正誤表の行単位照合、同一食品状態での複数出典比較、データセット網羅性・大規模整合性QA、追加果物・調味料・加工食品の拡張、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未完了。MacroPilot MVPは**未完成**。
+- **保護境界**：更新先は `feature/macropilot-mvp` の食品JSON、テスト、QAレポートのみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更しない。今回のデータcommit、テストcommit、QAレポートcommitのActionsをそれぞれ完了まで追跡し、各run本体の最終状態と全stepを記録する。
