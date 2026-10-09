@@ -15,7 +15,14 @@ for (const food of foods) {
   for (const key of nutrientKeys) assert.ok(Number.isFinite(food.nutrients[key]) && food.nutrients[key] >= 0, food.id + ': invalid ' + key);
   const p = food.provenance;
   assert.ok(schema.properties.provenance.properties.status.enum.includes(p.status), food.id + ': invalid provenance status');
-  assert.ok(p.sourceUrl.startsWith('https://fooddb.mext.go.jp/details/'), food.id + ': official individual page required');
+  if (p.status === 'OFFICIAL_PAGE_SECONDARY_MATCH' || p.status === 'OFFICIAL_PAGE_ONLY' || p.status === 'CSV_ROW_VERIFIED') {
+    assert.ok(p.sourceUrl.startsWith('https://fooddb.mext.go.jp/details/'), food.id + ': official individual page required for verified status');
+  } else {
+    assert.ok(p.status === 'SECONDARY_SOURCE_UNVERIFIED', food.id + ': unverified records must be explicitly labeled');
+    assert.ok(/^https:\/\//.test(p.sourceUrl), food.id + ': secondary source URL required');
+    assert.ok(p.secondarySources.includes(p.sourceUrl), food.id + ': source URL must be retained in provenance');
+    assert.equal(p.secondaryCheck, 'NOT_CHECKED', food.id + ': unverified secondary data must not claim a match');
+  }
   assert.ok(/^\d{5}$/.test(p.foodNumber), food.id + ': food number must be five digits');
   assert.ok(p.foodState.trim(), food.id + ': food state required');
   assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(p.verifiedAt), food.id + ': verifiedAt must be ISO date');
@@ -38,4 +45,24 @@ for (const food of foods) {
   assert.ok(food.provenance.status === 'OFFICIAL_PAGE_SECONDARY_MATCH' || food.provenance.status === 'OFFICIAL_PAGE_ONLY' || food.provenance.status === 'CSV_ROW_VERIFIED' || food.provenance.status === 'SAMPLE_UNVERIFIED', food.id + ': recognized evidence status');
   if (food.provenance.errataStatus !== 'ROW_CHECKED' && food.provenance.errataStatus !== 'NOT_APPLICABLE') assert.notEqual(food.provenance.errataStatus,'ROW_CHECKED',food.id + ': errata must not be marked checked without row evidence');
 }
-console.log('PASS: ' + foods.length + ' food records validated for unique IDs/numbers, all registered nutrients for the two official-page-checked foods, provenance, secondary checks, and explicit errata status');
+const expectedSecondary = {
+  tofu_momen: {number:'04032', energyKcal:73, proteinG:7.0, carbohydrateG:1.5, fatG:4.9, url:'https://diet.relifeinc.jp/food/04032/'},
+  natto: {number:'04046', energyKcal:184, proteinG:16.5, carbohydrateG:12.1, fatG:10.0, url:'https://diet.relifeinc.jp/food/04046/'},
+  broccoli_raw: {number:'06263', energyKcal:37, proteinG:5.4, carbohydrateG:6.6, fatG:0.6, url:'https://diet.relifeinc.jp/food/06263/'},
+  tuna_water_canned: {number:'10260', energyKcal:70, proteinG:16.0, carbohydrateG:0.2, fatG:0.7, url:'https://diet.relifeinc.jp/food/10260/'},
+  sweet_potato_steamed_peeled: {number:'02007', energyKcal:131, proteinG:1.2, carbohydrateG:31.9, fatG:0.2, url:'https://diet.relifeinc.jp/food/02007/'},
+  soy_milk_unadjusted: {number:'04052', energyKcal:43, proteinG:3.6, carbohydrateG:2.3, fatG:2.8, url:'https://diet.relifeinc.jp/food/04052/'},
+  soybean_dry_domestic: {number:'04023', energyKcal:372, proteinG:33.8, carbohydrateG:29.5, fatG:19.7, url:'https://diet.relifeinc.jp/food/04023/'}
+};
+for (const [id, expected] of Object.entries(expectedSecondary)) {
+  const food = foods.find(f => f.id === id);
+  assert.ok(food, id + ': sourced secondary record exists');
+  assert.equal(food.provenance.status, 'SECONDARY_SOURCE_UNVERIFIED');
+  assert.equal(food.provenance.foodNumber, expected.number);
+  assert.equal(food.provenance.sourceUrl, expected.url);
+  assert.deepEqual(food.nutrients, {energyKcal:expected.energyKcal,proteinG:expected.proteinG,carbohydrateG:expected.carbohydrateG,fatG:expected.fatG});
+  assert.equal(food.provenance.errataStatus,'NOT_ROW_CHECKED');
+  assert.equal(food.provenance.secondaryCheck,'NOT_CHECKED');
+}
+assert.equal(foods.length,9,'expected two previously verified records plus seven secondary-source records');
+console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 7 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
