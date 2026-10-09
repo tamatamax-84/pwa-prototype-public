@@ -6,13 +6,13 @@
 - Canonical OS was loaded from tamatamax-84/AI-TEAM-NEXUS, main, OS/AI_TEAM_HQ_OS.md; verified OS_NAME=AI TEAM HQ OS, VERSION=v3.0 Compact, STATUS=ACTIVE, CANONICAL=YES. No OS repository writes were made.
 
 ## PASS
-- GitHub Actions run 37965356615 succeeded for commit 565ae55b7a0714746614aff6ef3b6e43469ed0fd: JavaScript syntax, nutrition tests, PWA static checks, official-foods provenance tests, Playwright Chromium browser integration, and JSON parsing.
+- GitHub Actions run 37965467879 succeeded for commit c7cdaf746b54b04b2c2b104f5e05875c64ecd229: JavaScript syntax, nutrition tests, PWA static checks, official-foods provenance tests, Playwright Chromium browser integration, and JSON parsing. A subsequent commit only corrected the official-food test's printed assertion count; its CI run is being checked separately.
 - Browser integration test covers goal save/reload persistence, meal add/reload/delete, date rollover, backup export/import, Service Worker control, offline shell reload, and online recovery in a simulated Chromium context.
 - Two official food rows were imported from the MEXT Food Composition Database, which indicates it is updated for the 2026-03-27 errata: rice (food no. 01088) and roasted skinless chicken breast (food no. 11288). Food number, cooking state, kcal/P/carbohydrate/fat, edition, source URL, and verification date are stored in official-foods.json and recorded in app.js.
 - PWA manifest declares standalone display and scope, index has a viewport meta tag, and Service Worker precaches the core shell assets.
 
 ## FAIL / NEEDS FIX
-- No current automated failure recorded in the last successful CI run. The latest mobile viewport and invalid-backup assertions are being added after that run and are not yet covered by the cited successful run.
+- No current automated failure recorded in the last successful CI run. No current automated failure recorded in the successful run. The final assertion-count-only commit is pending its own CI confirmation at the time of this report.
 
 ## NOT EXECUTED / NOT VERIFIED
 - The official MEXT Excel workbook and 2026-03-27 errata XLSX could not be downloaded and parsed in this environment; row-level Excel-to-database reconciliation is incomplete. The two official records were verified from the MEXT database individual food pages instead.
