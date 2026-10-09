@@ -1,4 +1,6 @@
 const DB='macropilot-v1';
+const Nutrition=window.MacroNutrition;
+const localISODate=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
 const foods=[
 {id:'rice',name:'ご飯（炊飯後）',emoji:'🍚',unit:'g',base:150,kcal:234,p:3.8,c:55.7,f:.5},
 {id:'chicken',name:'鶏むね肉（皮なし・加熱）',emoji:'🍗',unit:'g',base:100,kcal:165,p:31,c:0,f:3.6},
@@ -19,17 +21,17 @@ const recipes=[
 {id:'r3',name:'オートミールヨーグルト',emoji:'🥣',time:'5分',desc:'オートミール・ヨーグルト・バナナ',ingredients:[['oats',40],['yogurt',100],['banana',1]],steps:['オートミールとヨーグルトを混ぜる。','バナナを切ってのせる。']},
 {id:'r4',name:'納豆たまごご飯',emoji:'🍚',time:'5分',desc:'ご飯・納豆・卵',ingredients:[['rice',150],['natto',1],['egg',1]],steps:['卵は安全に取り扱い、必要に応じて加熱する。','ご飯に納豆と卵を添える。']}
 ];
-const defaults={goals:{type:'bulk',kcal:2200,p:140,c:250,f:60,configured:false},logs:[],meal:'朝食',date:new Date().toLocaleDateString('en-CA')};
+const defaults={goals:{type:'bulk',kcal:2200,p:140,c:250,f:60,configured:false},logs:[],meal:'朝食',date:localISODate()};
 let state=(()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(DB)),goals:{...defaults.goals,...(JSON.parse(localStorage.getItem(DB))||{}).goals}}}catch{return structuredClone(defaults)}})();
 const $=id=>document.getElementById(id),round=n=>Math.round(n*10)/10,fmt=n=>Math.round(n).toLocaleString('ja-JP');
 function save(){localStorage.setItem(DB,JSON.stringify(state))}
-function n(food,amount){let x=amount/food.base;return{kcal:food.kcal*x,p:food.p*x,c:food.c*x,f:food.f*x}}
-function total(logs=state.logs){return logs.reduce((a,l)=>{let f=foods.find(x=>x.id===l.food);if(f){let v=n(f,l.amount);Object.keys(a).forEach(k=>a[k]+=v[k])}return a},{kcal:0,p:0,c:0,f:0})}
+function n(food,amount){return Nutrition.scale(food,amount)}
+function total(logs=state.logs){return Nutrition.sum(logs,foods,'food','amount')}
 function safe(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function recipeTotal(r){return r.ingredients.reduce((a,[id,amount])=>{let v=n(foods.find(f=>f.id===id),amount);Object.keys(a).forEach(k=>a[k]+=v[k]);return a},{kcal:0,p:0,c:0,f:0})}
+function recipeTotal(r){return Nutrition.sum(r.ingredients.map(([food,amount])=>({food,amount})),foods,'food','amount')}
 function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
 function render(){
- const d=new Date().toLocaleDateString('en-CA');if(state.date!==d){state.date=d;state.logs=[];save()}
+ const d=localISODate();if(state.date!==d){state.date=d;state.logs=[];save()}
  const t=total(),g=state.goals;$('date').textContent=new Date().toLocaleDateString('ja-JP',{month:'long',day:'numeric',weekday:'short'});$('mode').textContent={bulk:'増量モード',cut:'減量モード',maintain:'維持モード'}[g.type];$('notice').hidden=g.configured;
  $('kcal').textContent=fmt(t.kcal);$('kgoal').textContent=fmt(g.kcal);$('kleft').textContent=fmt(g.kcal-t.kcal);$('kbar').style.width=Math.min(100,t.kcal/g.kcal*100)+'%';
  for(let k of ['p','c','f']){$(k).textContent=fmt(t[k]);$('g'+k).textContent=fmt(g[k]);$('l'+k).textContent=fmt(g[k]-t[k]);$('b'+k).style.width=Math.min(100,t[k]/Math.max(1,g[k])*100)+'%'}
@@ -48,6 +50,6 @@ $('settings').onclick=openGoals;$('edit').onclick=openGoals;$('setup').onclick=o
 $('goalForm').addEventListener('submit',e=>{e.preventDefault();let g={type:$('type').value,kcal:Number($('goalkcal').value),p:Number($('goalp').value),c:Number($('goalc').value),f:Number($('goalf').value),configured:true};if(!Object.values(g).slice(1,5).every(x=>Number.isFinite(x)&&x>=0)){toast('目標値を確認してください');return}state.goals=g;save();$('goals').close();render();toast('目標を保存しました')});
 $('clear').onclick=()=>{if(confirm('今日の記録をすべて削除しますか？')){state.logs=[];save();render()}};
 $('export').onclick=()=>{let a=document.createElement('a'),u=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.href=u;a.download='macropilot-backup.json';a.click();URL.revokeObjectURL(u)};
-$('import').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(!x.goals||!Array.isArray(x.logs))throw Error();state={...defaults,...x,goals:{...defaults.goals,...x.goals}};save();render();toast('復元しました')}catch{toast('バックアップを読み込めません')}e.target.value=''};
+$('import').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(!Nutrition.validateBackup(x,foods.map(f=>f.id)))throw Error('invalid backup');state={...defaults,...x,goals:{...defaults.goals,...x.goals}};save();render();toast('復元しました')}catch{toast('バックアップを読み込めません')}e.target.value=''};
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 render();
