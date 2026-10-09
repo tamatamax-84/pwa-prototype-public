@@ -63,3 +63,13 @@
 - **今回のCSV実データ取得結果**：未取得。CSVダウンロード機能の存在と操作構造は公式ヘルプ／検索画面で確認したが、CSVファイル自体をダウンロード・解析できていないため、CSVからの行単位照合は未実施。
 - **未解決ゲート**：2026年3月27日付正誤表のファイル取得・行単位照合、iPhone実機Safari、ホーム画面追加、実機オフライン起動・復帰・再接続、HTTPS公開は未実施／未確認。MacroPilot MVPは完成扱いにしない。
 - **保護境界**：今回の更新は `feature/macropilot-mvp` の `macropilot/QA_REPORT.md` のみ。`main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更していない。
+
+
+## 追加検証（2026-10-10・Run #37967531194最終確認／食品データ拡張方式）
+- **PASS**：GitHub Actions run [37967531194](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37967531194) を再取得。対象commitは指定どおり `c30bbe5ffbba6641378b0a7cdb0ba9d146a3f556`、branchは `feature/macropilot-mvp`、状態 `completed`、結論 `success`。ジョブ `validate`（ID `113945529010`）と全ステップ（setup、checkout、setup-node、JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理）が `success`。失敗なしのため修正・再実行は不要。
+- **CSV取得の別経路を再検討**：現在利用可能な実行ツールを確認したが、外部サイトのiframe内でフォームを入力・送信し、セッション付き結果画面からファイルをクリックして保存する実ブラウザ自動操作／ファイルダウンロード経路は利用できなかった。公式ヘルプは検索結果CSV機能を明記している（https://fooddb.mext.go.jp/help.html、https://fooddb.mext.go.jp/help/help_r.html）が、今回もCSVファイル自体は取得していない。直接URLやPOSTパラメータの推測は行っていない。**CSV実取得・解析・CSV行単位照合：未実施**。
+- **公式個別ページ＋民間二次情報の拡張案**：公式個別ページを基準データとし、食品番号、食品状態、食品名、単位（可食部100g）、各栄養値、出典URL、取得日、データ版、確認ステータスを構造化して別JSONファイルに蓄積する方式は技術的に可能。現在も `official-foods.json` は別ファイルだが、現状2件のみ。テスト `official-foods.test.js` は現在 `foods.length === 2` を固定検査しているため、大規模化時は件数固定をやめ、ID一意性・必須スキーマ・出典ドメイン・数値型・食品番号/食品状態・重複・検証ステータス・代表食品の期待値を検査するテストへ変更する必要がある。アプリ側の `nutrition-core.js` は食品配列を受け取って計算する汎用処理であり、データを別JSONに分離して拡張する設計と整合する。
+- **採用基準（未実装の提案）**：公式個別ページを一次ソースとして記録し、民間サイトは独立一次ソースとは見なさず二次的な不一致検出に限定する。食品番号・調理状態・100g基準・エネルギー/P/F/Cを一致確認し、不一致は自動採用せず例外記録へ送る。正誤表の反映確認を各レコードに明記し、確認できないものを「正誤表照合済み」と表示しない。確認済みレコードと未確認レコードは別の状態で管理する。
+- **現時点のデータ収集結果**：今回、新規の大量収集やレコード追加は行っていない。既存の2件は公式個別ページと民間二次情報の主要値一致を確認済みだが、民間サイトは公式データからの派生情報である可能性があり、独立した一次検証ではない。別JSON方式は実装可能と判断するが、大規模収集・整合性QA・アプリ連携の実装完了とは扱わない。
+- **引き続き未実施／未確認**：2026年3月27日付正誤表の取得と行単位照合、CSV実取得・解析、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開。
+- **完成判定**：未解決ゲートが残るため MacroPilot MVP は引き続き**未完成**。保護対象の `main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更していない。今回の書き込みは `feature/macropilot-mvp/macropilot/QA_REPORT.md` のみ。
