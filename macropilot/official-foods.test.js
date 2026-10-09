@@ -52,7 +52,14 @@ const expectedSecondary = {
   tuna_water_canned: {number:'10260', energyKcal:70, proteinG:16.0, carbohydrateG:0.2, fatG:0.7, url:'https://diet.relifeinc.jp/food/10260/'},
   sweet_potato_steamed_peeled: {number:'02007', energyKcal:131, proteinG:1.2, carbohydrateG:31.9, fatG:0.2, url:'https://diet.relifeinc.jp/food/02007/'},
   soy_milk_unadjusted: {number:'04052', energyKcal:43, proteinG:3.6, carbohydrateG:2.3, fatG:2.8, url:'https://diet.relifeinc.jp/food/04052/'},
-  soybean_dry_domestic: {number:'04023', energyKcal:372, proteinG:33.8, carbohydrateG:29.5, fatG:19.7, url:'https://diet.relifeinc.jp/food/04023/'}
+  soybean_dry_domestic: {number:'04023', energyKcal:372, proteinG:33.8, carbohydrateG:29.5, fatG:19.7, url:'https://diet.relifeinc.jp/food/04023/'},
+  strong_flour: {number:'01020', energyKcal:337, proteinG:11.8, carbohydrateG:71.7, fatG:1.5, url:'https://diet.relifeinc.jp/food/01020/'},
+  pasta_dry: {number:'01063', energyKcal:347, proteinG:12.9, carbohydrateG:73.1, fatG:1.8, url:'https://diet.relifeinc.jp/food/01063/'},
+  tempeh: {number:'04063', energyKcal:180, proteinG:15.8, carbohydrateG:15.4, fatG:9.0, url:'https://diet.relifeinc.jp/food/04063/'},
+  mitsuba_cut_raw: {number:'06274', energyKcal:16, proteinG:1.0, carbohydrateG:4.0, fatG:0.1, url:'https://diet.relifeinc.jp/food/06274/'},
+  daikon_raw: {number:'06134', energyKcal:15, proteinG:0.4, carbohydrateG:4.1, fatG:0.1, url:'https://diet.relifeinc.jp/food/06134/'},
+  eggplant_raw: {number:'06191', energyKcal:18, proteinG:1.1, carbohydrateG:5.1, fatG:0.1, url:'https://diet.relifeinc.jp/food/06191/'},
+  pork_loin_raw: {number:'11123', energyKcal:248, proteinG:19.3, carbohydrateG:0.2, fatG:19.2, url:'https://diet.relifeinc.jp/food/11123/'}
 };
 for (const [id, expected] of Object.entries(expectedSecondary)) {
   const food = foods.find(f => f.id === id);
@@ -64,5 +71,5 @@ for (const [id, expected] of Object.entries(expectedSecondary)) {
   assert.equal(food.provenance.errataStatus,'NOT_ROW_CHECKED');
   assert.equal(food.provenance.secondaryCheck,'NOT_CHECKED');
 }
-assert.equal(foods.length,9,'expected two previously verified records plus seven secondary-source records');
-console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 7 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
+assert.equal(foods.length,16,'expected two official-page-checked records plus fourteen secondary-source records');
+console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 14 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
