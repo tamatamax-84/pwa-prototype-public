@@ -42,3 +42,15 @@
 - 文部科学省・食品成分表と正誤表掲載ページ：https://www.mext.go.jp/a_menu/syokuhinseibun/mext_00001.html
 - 食品成分データベース：https://fooddb.mext.go.jp/
 - 正誤表Excel（2026年3月27日）：https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_16.xlsx
+
+
+## 追加検証（2026-10-10・run 38cf8e8 対応確認）
+- **PASS**：QAレポート更新commit `38cf8e8c74b36ae532570dce0ab4ffd735357b18` に対するGitHub Actions run [37966931246](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37966931246) は `completed / success`。ジョブ `validate` および以下のステップがすべて `success`：Set up job、checkout、setup-node、JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理。失敗ステップはなく、修正・再実行は不要。
+- **PASS**：直前のQAレポート更新commit `e7fd240322affaf31592738d568d9a98af468a3c` のrun [37966884990](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37966884990) も `completed / success`。同じ3つの検証ステップが成功。
+- **食品データ・検索UI経路**：文部科学省 食品成分データベースのヘルプに、検索結果をCSV形式でダウンロードできる旨が明記されている（https://fooddb.mext.go.jp/help.html）。検索画面（https://fooddb.mext.go.jp/search.html）も確認したが、この実行環境では検索フォームを操作してCSVファイルを実ダウンロード・解析するところまでは到達できなかった。よって**CSV実データ取得・CSVからの行単位照合は未実施**。機能説明を実データ取得済みと扱わない。
+- **代替データによる照合（CSVの代替であり、CSV検証の代替完了ではない）**：
+  - ご飯（炊飯後）：公式個別ページは食品番号 `01088`、食品状態「こめ［水稲めし］/精白米/うるち米」、100gあたり 156 kcal / たんぱく質 2.5g / 脂質 0.3g / 炭水化物 37.1g を表示（https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7）。民間サイトRelife Dietも食品番号01088と同じ4値を掲載（https://diet.relifeinc.jp/food/01088/）。食品番号・状態・主要栄養値の一致を確認した。ただし独立した一次データではなく、民間サイトは成分表を参照している二次情報。
+  - 鶏むね肉（皮なし・焼き）：公式個別ページは食品番号 `11288`、食品状態「若どり・むね・皮なし・焼き」、100gあたり 177 kcal / たんぱく質 38.8g / 脂質 3.3g / 炭水化物 0.1g を表示（https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=11_11288_7）。民間サイトRelife Dietも食品番号11288と同じ4値を掲載（https://diet.relifeinc.jp/food/11288/）。食品番号・状態・主要栄養値の一致を確認した。ただし独立した一次データではなく、民間サイトは成分表を参照している二次情報。
+  - 文部科学省の公表ページでは2026年3月27日付正誤表が案内されている（https://www.mext.go.jp/a_menu/syokuhinseibun/mext_00001.html）。正誤表ファイル自体の取得・解析は今回も未実施のため、今回の民間サイト照合は当該正誤表の全行確認を代替しない。
+- **実機・公開ゲート**：iPhone実機Safari、ホーム画面追加、実機オフライン起動・復帰・再接続、HTTPS公開の状態は引き続き**未実施／未確認**。自動Chromiumテスト結果から実機PASSを推定しない。
+- **保護境界**：今回の書き込み先は `feature/macropilot-mvp` のみ。 `main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更対象にしていない。MacroPilot MVPは未解決ゲートが残るため**未完成**のまま。
