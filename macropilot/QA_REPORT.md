@@ -164,3 +164,23 @@
 - 期待件数を16件に修正したテストcommit `dfb63a3f75c5370138dead126f138e9c19ed1f84` の [Run #37970965230](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970965230) は最終確認時点で `in_progress`。構文検査は成功、栄養・バックアップ検証ステップは実行中表示。完了結果は未取得。
 - status allowlist修正commit `5dc50fd5aacbf4a14e881d7bb49f4469e5d16a56` の [Run #37970889384](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970889384) も `in_progress` 表示のまま更新時刻が停滞しており、完了結論を確認できていない。一方、その次のQAレポートcommit `2ded6c4fca54a8092db8136dfaea959c2cd84b4f` の [Run #37970903964](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970903964) は `completed / success`。
 - したがって、食品追加・テスト拡張の最新状態をCI PASSと報告しない。次のレポートcommitのActionsも追跡対象。
+
+## CI追跡完了・食品データ第3バッチ（2026-10-10）
+- **完了・PASS**：QAレポート更新commit `7684281608f64163eafa8d021e9c03c94048d41d` の [GitHub Actions Run #37971067644](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37971067644) を再確認。対象branch `feature/macropilot-mvp`、状態 `completed`、結論 `success`。job `validate`（ID `113957513039`）と JavaScript syntax、Nutrition and backup validation tests、JSON validation、setup/checkout/後処理の全ステップが成功。
+- **食品データ件数**：16件から26件へ拡張。新規10件はすべて二次情報サイト Relife Diet の食品別ページに表示された値を転記し、`SECONDARY_SOURCE_UNVERIFIED`、`secondaryCheck=NOT_CHECKED`、`errataStatus=NOT_ROW_CHECKED` を維持。公式個別ページで独立照合済みの件数は従来どおり2件。
+- **追加10件（100gあたり kcal / たんぱく質g / 炭水化物g / 脂質g）**：
+  - 卵（鶏卵・全卵・生）12004：142 / 12.2 / 0.4 / 10.2。出典 https://diet.relifeinc.jp/food/12004/
+  - 牛乳（普通牛乳）13003：61 / 3.3 / 4.8 / 3.8。出典 https://diet.relifeinc.jp/food/13003/
+  - 鮭（しろさけ・生）10134：124 / 22.3 / 0.1 / 4.1。出典 https://diet.relifeinc.jp/food/10134/
+  - さば（まさば・生）10154：211 / 20.6 / 0.3 / 16.8。出典 https://diet.relifeinc.jp/food/10154/
+  - トマト（生）06182：20 / 0.7 / 4.7 / 0.1。出典 https://diet.relifeinc.jp/food/06182/
+  - にんじん（皮なし・生）06214：32 / 0.7 / 8.8 / 0.2。出典 https://diet.relifeinc.jp/food/06214/
+  - キャベツ（生）06061：23 / 1.2 / 5.2 / 0.1。出典 https://diet.relifeinc.jp/food/06061/
+  - 鶏もも肉（皮なし・生）11224：113 / 19.0 / 0 / 5.0。出典 https://diet.relifeinc.jp/food/11224/
+  - プレーンヨーグルト（全脂・無糖）13025：56 / 3.6 / 4.9 / 3.0。出典 https://diet.relifeinc.jp/food/13025/
+  - しょうが（皮なし・生）06103：28 / 0.9 / 6.6 / 0.3。出典 https://diet.relifeinc.jp/food/06103/
+- **出典不一致の扱い**：今回の各出典ページでは、同一食品ページに調理状態別の比較値が表示されるものがある（例：卵の生142／ゆで134／いり190 kcal、さばの生211／水煮253／焼き264 kcal、鶏もも皮なしの生113／ゆで141／焼き145 kcal）。これは同一食品状態の不一致とは見なさず、食品状態が異なる別値として保持。異なる状態・食品番号間の数値は統合していない。独立した同一状態の二次ソース間でのクロスチェックは未実施であり、`CONFLICT` の有無を確定できるだけの比較資料は未取得。
+- **自動テスト**：`official-foods.test.js` を更新し、全26件のID／食品番号一意性、100g基準、非負・有限の4栄養値、出典URL、検証ステータス、二次情報14件＋今回10件の値を明示的に検証。データ件数期待値を26件へ更新。
+- **更新commitとCI追跡対象**：食品データcommit `d6d673f6988d347e3d43d7a5331cbef023f8c937`、テストcommit `ce6a8d263926a66ce35d8a737a7d05c893e98ec5`、本QAレポート追記commitはそれぞれGitHub Actionsを追跡する。最新runが完了・successと確認されるまで、当該commitのCI PASSを宣言しない。
+- **未解決ゲート**：公式CSV実取得・解析、2026-03-27正誤表の行単位照合、同一食品状態の複数ソース間比較、データセット網羅性・大規模整合性QA、果物・調味料・加工食品を含むカバレッジ拡張、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未解決。MacroPilot MVPは**未完成**。
+- **保護境界**：変更先は `feature/macropilot-mvp` の `macropilot/official-foods.json`、`macropilot/official-foods.test.js`、`macropilot/QA_REPORT.md` のみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更していない。
