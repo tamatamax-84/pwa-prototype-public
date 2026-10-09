@@ -147,3 +147,9 @@
 - **スキーマとテストの変更**：`food-data.schema.json` に `SECONDARY_SOURCE_UNVERIFIED` を追加。`official-foods.test.js` は二次情報レコードの出典URL・食品番号・4栄養値・未照合ステータスを検証し、未確認データが公式照合済みとして扱われないことを確認する。データ件数は9件、うち公式個別ページ照合済み2件、二次情報のみ7件。
 - **更新commit**：食品データ `d7b76128a51c7fef95f02178c471e526f688da78`、スキーマ `0a1c632522dc15ffe4bd1809f587c938b42a3f34`、食品テスト `9068f6c281a0313e76be30745343de2e2190de55`。それぞれのGitHub Actionsを追跡し、完了するまではCI PASSを宣言しない。
 - **残存ゲート**：正誤表行単位照合、公式CSV取得、全データセットの網羅性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開。MacroPilot MVPは未完成。
+## 自律Recovery（2026-10-10・二次情報ステータスのテスト不整合）
+- 初回食品データ追加commit `d7b76128a51c7fef95f02178c471e526f688da78` の [Run #37970790422](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970790422) は失敗。ログで `official-foods.test.js` の provenance status allowlist が新設 `SECONDARY_SOURCE_UNVERIFIED` を許可していないことを確認した。
+- スキーマcommit `0a1c632522dc15ffe4bd1809f587c938b42a3f34` の [Run #37970808944](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970808944) も失敗。ログでテスト側の公式URL限定assertionが二次情報レコードを拒否していたことを確認した。
+- テストcommit `9068f6c281a0313e76be30745343de2e2190de55` の [Run #37970813317](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970813317) は失敗。ログで二次情報ステータスのallowlist不一致を確認した。
+- Recoveryとして `official-foods.test.js` のステータスallowlistを修正し、`SECONDARY_SOURCE_UNVERIFIED` を許可対象に追加した。修正commit `5dc50fd5aacbf4a14e881d7bb49f4469e5d16a56` のActions結果は未確認のため、修正後CIが成功するまで食品データ拡充QAをPASSとしない。
+- 本レポート更新commit `484e2027d683c01488d507da1c52b9f56b3c0385` はRunの検索時点でまだ一覧に現れず、Actions実行確認未取得。
