@@ -159,3 +159,8 @@
 - 第2バッチデータcommit `ba7a32cc5bce7c12b2beeb8b0557ae5aec12d039`、対応テストcommit `dfb63a3f75c5370138dead126f138e9c19ed1f84`。最新テストは16件すべてのID・食品番号一意性、主要栄養値、出典URL、検証状態を検査する。CI結果は別途追跡中。
 - **Recovery後のCI**：status allowlist修正commit `5dc50fd5aacbf4a14e881d7bb49f4469e5d16a56` のRun #37970889384、およびそのQAレポートcommit `2ded6c4fca54a8092db8136dfaea959c2cd84b4f` のRun #37970903964 は、最終確認時点でともに `in_progress`。nutrition/backup validationステップが実行中表示のままのため、成功を宣言しない。
 - 二次情報データは検索・食事記録のカバレッジ拡大用の暫定データ。健康判断や厳密な栄養管理の根拠として公式照合済みと同等に扱わない。食品状態の曖昧さ、ブランド品、調理油・調味料込みの料理は別レコードとして分離し、異なる状態の数値を混ぜない。
+## CI結果追記（2026-10-10・16食品データセット）
+- `ba7a32cc5bce7c12b2beeb8b0557ae5aec12d039` の [Run #37970951386](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970951386) は失敗。ログで食品件数を9件に固定した旧テスト期待値と、16件に拡張したデータセットの不一致を確認した。これはデータ値の不一致ではなくテストの期待件数更新漏れ。
+- 期待件数を16件に修正したテストcommit `dfb63a3f75c5370138dead126f138e9c19ed1f84` の [Run #37970965230](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970965230) は最終確認時点で `in_progress`。構文検査は成功、栄養・バックアップ検証ステップは実行中表示。完了結果は未取得。
+- status allowlist修正commit `5dc50fd5aacbf4a14e881d7bb49f4469e5d16a56` の [Run #37970889384](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970889384) も `in_progress` 表示のまま更新時刻が停滞しており、完了結論を確認できていない。一方、その次のQAレポートcommit `2ded6c4fca54a8092db8136dfaea959c2cd84b4f` の [Run #37970903964](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970903964) は `completed / success`。
+- したがって、食品追加・テスト拡張の最新状態をCI PASSと報告しない。次のレポートcommitのActionsも追跡対象。
