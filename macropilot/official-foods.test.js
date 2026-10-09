@@ -59,7 +59,18 @@ const expectedSecondary = {
   mitsuba_cut_raw: {number:'06274', energyKcal:16, proteinG:1.0, carbohydrateG:4.0, fatG:0.1, url:'https://diet.relifeinc.jp/food/06274/'},
   daikon_raw: {number:'06134', energyKcal:15, proteinG:0.4, carbohydrateG:4.1, fatG:0.1, url:'https://diet.relifeinc.jp/food/06134/'},
   eggplant_raw: {number:'06191', energyKcal:18, proteinG:1.1, carbohydrateG:5.1, fatG:0.1, url:'https://diet.relifeinc.jp/food/06191/'},
-  pork_loin_raw: {number:'11123', energyKcal:248, proteinG:19.3, carbohydrateG:0.2, fatG:19.2, url:'https://diet.relifeinc.jp/food/11123/'}
+  pork_loin_raw: {number:'11123', energyKcal:248, proteinG:19.3, carbohydrateG:0.2, fatG:19.2, url:'https://diet.relifeinc.jp/food/11123/'},
+
+  egg_whole_raw: {number:'12004', energyKcal:142, proteinG:12.2, carbohydrateG:0.4, fatG:10.2, url:'https://diet.relifeinc.jp/food/12004/'},
+  milk_whole: {number:'13003', energyKcal:61, proteinG:3.3, carbohydrateG:4.8, fatG:3.8, url:'https://diet.relifeinc.jp/food/13003/'},
+  salmon_white_raw: {number:'10134', energyKcal:124, proteinG:22.3, carbohydrateG:0.1, fatG:4.1, url:'https://diet.relifeinc.jp/food/10134/'},
+  mackerel_raw: {number:'10154', energyKcal:211, proteinG:20.6, carbohydrateG:0.3, fatG:16.8, url:'https://diet.relifeinc.jp/food/10154/'},
+  tomato_raw: {number:'06182', energyKcal:20, proteinG:0.7, carbohydrateG:4.7, fatG:0.1, url:'https://diet.relifeinc.jp/food/06182/'},
+  carrot_peeled_raw: {number:'06214', energyKcal:32, proteinG:0.7, carbohydrateG:8.8, fatG:0.2, url:'https://diet.relifeinc.jp/food/06214/'},
+  cabbage_raw: {number:'06061', energyKcal:23, proteinG:1.2, carbohydrateG:5.2, fatG:0.1, url:'https://diet.relifeinc.jp/food/06061/'},
+  chicken_thigh_skinless_raw: {number:'11224', energyKcal:113, proteinG:19.0, carbohydrateG:0, fatG:5.0, url:'https://diet.relifeinc.jp/food/11224/'},
+  plain_yogurt_unsweetened: {number:'13025', energyKcal:56, proteinG:3.6, carbohydrateG:4.9, fatG:3.0, url:'https://diet.relifeinc.jp/food/13025/'},
+  ginger_peeled_raw: {number:'06103', energyKcal:28, proteinG:0.9, carbohydrateG:6.6, fatG:0.3, url:'https://diet.relifeinc.jp/food/06103/'},
 };
 for (const [id, expected] of Object.entries(expectedSecondary)) {
   const food = foods.find(f => f.id === id);
@@ -71,5 +82,5 @@ for (const [id, expected] of Object.entries(expectedSecondary)) {
   assert.equal(food.provenance.errataStatus,'NOT_ROW_CHECKED');
   assert.equal(food.provenance.secondaryCheck,'NOT_CHECKED');
 }
-assert.equal(foods.length,16,'expected two official-page-checked records plus fourteen secondary-source records');
-console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 14 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
+assert.equal(foods.length,26,'expected two official-page-checked records plus twenty-four secondary-source records');
+console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 24 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
