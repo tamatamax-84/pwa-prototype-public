@@ -98,3 +98,10 @@
 - **PASS**：QAレポート更新commit `2471ef9e913a9f4969c14df3ee48bd2decaa2f9c` に対するRun [37968754942](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37968754942) を再確認。状態 `completed`、結論 `success`。Job `validate` と全ステップ（checkout、setup-node、JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理）が成功。
 - **保護境界の再確認**：`main` と `baseline/pwa-foundation-v1.0` の `index.html`、`app.js`、`manifest.json` のSHAはそれぞれ一致し、変更なし。Canonical OSは `tamatamax-84/AI-TEAM-NEXUS/main/OS/AI_TEAM_HQ_OS.md` をロードし、`OS_NAME=AI TEAM HQ OS`、`VERSION=v3.0 Compact`、`STATUS=ACTIVE`、`CANONICAL=YES`、Repository／Pathが指定値であることを確認。Canonical OSへの書き込みなし。
 - **完成判定**：CI PASSは現HEADの自動検証結果であり、外部・実機ゲートを代替しない。CSV実取得・解析、2026-03-27正誤表の行単位照合、大規模データの整合性確認、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開は未確認のまま。MacroPilot MVPは未完成。
+
+
+## 最終QA追跡（2026-10-10・Run #37969331609）
+- **PASS**：Run [37969331609](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37969331609) を再確認。対象commit `96661f0197d342803602e23a16775454ec273de0`、branch `feature/macropilot-mvp`、状態 `completed`、結論 `success`。ジョブ `validate`（ID `113951626094`）は成功し、Set up job、checkout、setup-node、JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理の全ステップが `success`。失敗ステップはなく、修正・再実行は不要。
+- **QAレポート更新後CI**：本追記自体を `feature/macropilot-mvp` にコミットし、その更新commitのGitHub Actionsを完了まで追跡する。追記後のrunが完了・成功するまでは、この最新QAレポート更新をCI PASSと扱わない。
+- **未解決ゲート／完成判定**：CSV実取得・解析、2026-03-27正誤表の行単位照合、大規模食品データの整合性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開は未実施／未確認。自動CIの成功はこれらの実機・データ検証を代替しない。MacroPilot MVPは**未完成**。
+- **保護境界**：変更先は `feature/macropilot-mvp/macropilot/QA_REPORT.md` のみ。`main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更しない。
