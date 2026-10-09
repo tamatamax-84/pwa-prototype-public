@@ -17,4 +17,20 @@ N.addLog(state,{id:'a',food:'rice',amount:150,meal:'朝食'},'2026-10-09');asser
 assert.equal(N.removeLog(state,'a'),1);assert.equal(state.logs.length,0);
 N.addLog(state,{id:'b',food:'rice',amount:150,meal:'朝食'},'2026-10-09');assert.equal(N.rollover(state,'2026-10-10'),true);assert.equal(state.logs.length,0);assert.equal(N.rollover(state,'2026-10-10'),false);
 assert.equal(N.setGoals(state,{type:'cut',kcal:1900,p:150,c:180,f:55}),true);assert.equal(state.goals.configured,true);assert.equal(state.goals.kcal,1900);assert.equal(N.setGoals(state,{type:'oops',kcal:1,p:1,c:1,f:1}),false);
-console.log('PASS: 19 assertions covering scaling, totals, target remainder, add/delete, date rollover, goal validation, and backup validation');
+
+assert.deepEqual(N.scale(foods[0],0),{kcal:0,p:0,c:0,f:0});
+assert.throws(()=>N.scale(foods[0],NaN),TypeError);
+assert.throws(()=>N.scale(foods[0],Infinity),TypeError);
+assert.throws(()=>N.scale({...foods[0],base:0},100),TypeError);
+assert.throws(()=>N.scale(null,100),TypeError);
+assert.throws(()=>N.sum([{food:'unknown',amount:100}],foods),/Unknown food id/);
+assert.throws(()=>N.addLog(state,{id:'bad',food:'rice',amount:0,meal:'朝食'},'2026-10-10'),TypeError);
+assert.throws(()=>N.addLog(state,{id:'bad',food:'rice',amount:10,meal:'brunch'},'2026-10-10'),TypeError);
+assert.equal(N.validateBackup({...good,logs:[{food:'rice',amount:1,meal:'朝食'}]},['rice','chicken']),true);
+assert.equal(N.validateBackup({...good,logs:[{food:'rice',amount:0,meal:'朝食'}]},['rice','chicken']),false);
+assert.equal(N.validateBackup({...good,logs:[{food:'rice',amount:'NaN',meal:'朝食'}]},['rice','chicken']),false);
+assert.equal(N.validateBackup({...good,logs:[{food:'rice',amount:1,meal:'brunch'}]},['rice','chicken']),false);
+assert.equal(N.validateBackup({...good,goals:{...good.goals,p:-1}},['rice','chicken']),false);
+assert.equal(N.validateBackup({...good,logs:'not-an-array'},['rice','chicken']),false);
+
+console.log('PASS: nutrition scaling, totals, target remainder, add/delete, date rollover, goal validation, backup validation, invalid inputs, and edge cases');
