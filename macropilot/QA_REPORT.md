@@ -105,3 +105,13 @@
 - **QAレポート更新後CI**：本追記自体を `feature/macropilot-mvp` にコミットし、その更新commitのGitHub Actionsを完了まで追跡する。追記後のrunが完了・成功するまでは、この最新QAレポート更新をCI PASSと扱わない。
 - **未解決ゲート／完成判定**：CSV実取得・解析、2026-03-27正誤表の行単位照合、大規模食品データの整合性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開は未実施／未確認。自動CIの成功はこれらの実機・データ検証を代替しない。MacroPilot MVPは**未完成**。
 - **保護境界**：変更先は `feature/macropilot-mvp/macropilot/QA_REPORT.md` のみ。`main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更しない。
+
+
+## 未解決ゲート再調査（2026-10-10・公式CSV／正誤表取得経路）
+- **公式ソース再確認**：文部科学省の食品成分データベースのヘルプは、検索結果をCSV形式でダウンロードできると明記している（https://fooddb.mext.go.jp/help.html、検索結果画面ヘルプ https://fooddb.mext.go.jp/help/help_r.html）。また、データベースの更新履歴は2026年6月9日に2026年3月27日付正誤表へ対応したと記載している（https://fooddb.mext.go.jp/history.pl）。これは公式サイト内データベースの更新説明であり、MacroPilot用CSV取得や正誤表ファイルの行単位比較を実施した証拠ではない。
+- **CSV実取得の結果：未取得**。公式ヘルプからCSVダウンロード機能の存在を再確認したが、取得可能な実行環境では、検索フォームへの入力・送信後に結果画面を作り、結果画面のCSVダウンロード操作でファイルを保存するブラウザ操作を実行できなかった。未確認のダウンロードURLやPOSTパラメータは推測していない。CSVの実データ解析、全件数確認、列・食品番号の整合性QAは未実施。
+- **正誤表Excel取得の結果：未取得**。文部科学省の掲載ページ（https://www.mext.go.jp/a_menu/syokuhinseibun/mext_00001.html）の「正誤表（データ）」リンクを確認し、公式URL https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_16.xlsx を再試行したが、Web取得環境ではXLSX MIME typeが未対応として拒否された。コンテナからのHTTPS取得もDNS解決エラーで失敗した。Excelバイナリの解析、シート・行・セルの比較、既存食品2件への正誤表適用確認はいずれも未実施。正誤表の行単位照合はPASSではない。
+- **既存2食品の範囲**：公式個別ページの表示値と既存の二次情報の一致確認は、過去記録どおり2食品に限る。これを食品成分表全体の整合性QAへ一般化しない。大量食品の追加・一括検証は今回も未実施。
+- **実機・公開ゲート**：iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開は今回も未実施／未確認。Chromium自動テストから実機PASSを推定しない。
+- **保護境界の再確認**：feature/macropilot-mvp のHEADは f186a7b19aeae8bacb1c77363b6579edcd2a2787。main と baseline/pwa-foundation-v1.0 の index.html SHA（3f9089932743669250e70e10648b4e5d5a65733a）、app.js SHA（aeb20927afa365bcc167d5ba05ce43e4d30cfad3）、manifest.json SHA（137f45e1abc13bd345cc33044c02dea4b5a0a9f1）は各々一致。Canonical OSは tamatamax-84/AI-TEAM-NEXUS/main/OS/AI_TEAM_HQ_OS.md からロードし、v3.0 Compact / ACTIVE / CANONICAL YESとRepository・Pathを検証。Canonical OSへの書き込みなし。
+- **完成判定**：CSV実取得、正誤表行単位照合、大規模食品データ整合性QA、実機・公開ゲートが未解決のため、MacroPilot MVPは引き続き**未完成**。本追記後のCI結果は別途Runを確認し、完了前にPASSと判定しない。
