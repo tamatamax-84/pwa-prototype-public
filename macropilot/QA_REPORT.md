@@ -184,3 +184,10 @@
 - **更新commitとCI追跡対象**：食品データcommit `d6d673f6988d347e3d43d7a5331cbef023f8c937`、テストcommit `ce6a8d263926a66ce35d8a737a7d05c893e98ec5`、本QAレポート追記commitはそれぞれGitHub Actionsを追跡する。最新runが完了・successと確認されるまで、当該commitのCI PASSを宣言しない。
 - **未解決ゲート**：公式CSV実取得・解析、2026-03-27正誤表の行単位照合、同一食品状態の複数ソース間比較、データセット網羅性・大規模整合性QA、果物・調味料・加工食品を含むカバレッジ拡張、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未解決。MacroPilot MVPは**未完成**。
 - **保護境界**：変更先は `feature/macropilot-mvp` の `macropilot/official-foods.json`、`macropilot/official-foods.test.js`、`macropilot/QA_REPORT.md` のみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更していない。
+
+
+## 第3バッチCI Recovery追記（2026-10-10）
+- **検出した失敗**：食品データcommit `d6d673f6988d347e3d43d7a5331cbef023f8c937` の [Run #38000529805](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000529805) は `completed / failure`。ログでは JavaScript syntax はPASS、食品テストが旧期待件数16と実データ26の不一致（`26 !== 16`）で失敗し、JSON validationは未実行。栄養値の不一致を示す失敗ではなく、件数テストの更新漏れ。
+- **修正と再検証**：`official-foods.test.js` の件数期待値を26に変更し、新規10件の食品番号・出典URL・4栄養値・未検証ステータスを追加したテストcommit `ce6a8d263926a66ce35d8a737a7d05c893e98ec5` の [Run #38000542751](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000542751) は、job `validate`（ID `114057266417`）および全stepが `completed / success` と確認。Actions run本体は最終照会時点で `in_progress` 表示のままなので、run全体の完了状態は未確定として保持する。
+- **最新レポートcommit**：本追記commit `39be802148e2aa3aed818274cd530e68890e9391` のActions [Run #38000559791](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000559791) も完了まで追跡する。job完了表示だけでrun全体の最終状態を代替しない。
+- **現時点の品質状態**：26件のデータレコードと対応する個別値アサーションを追加。二次情報24件は引き続き未検証ラベルを保持。公式ページ照合済みは2件のみ。MVPは未完成。
