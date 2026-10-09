@@ -73,3 +73,14 @@
 - **現時点のデータ収集結果**：今回、新規の大量収集やレコード追加は行っていない。既存の2件は公式個別ページと民間二次情報の主要値一致を確認済みだが、民間サイトは公式データからの派生情報である可能性があり、独立した一次検証ではない。別JSON方式は実装可能と判断するが、大規模収集・整合性QA・アプリ連携の実装完了とは扱わない。
 - **引き続き未実施／未確認**：2026年3月27日付正誤表の取得と行単位照合、CSV実取得・解析、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開。
 - **完成判定**：未解決ゲートが残るため MacroPilot MVP は引き続き**未完成**。保護対象の `main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更していない。今回の書き込みは `feature/macropilot-mvp/macropilot/QA_REPORT.md` のみ。
+
+
+## 追加検証（2026-10-10・食品データ仕様／実行時統合）
+- **公式個別ページ再確認**：文部科学省の公式詳細ページで食品番号・食品状態・主要値を再確認。ご飯は食品番号 `01088`、炊飯後の精白うるち米、100gあたり156kcal・P2.5g・脂質0.3g・炭水化物37.1g（https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7）。鶏むね肉は食品番号 `11288`、若どり・むね・皮なし・焼き、100gあたり177kcal・P38.8g・脂質3.3g・炭水化物0.1g（https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=11_11288_7）。民間Relife Dietの該当ページでも食品番号と主要値の一致を確認（https://diet.relifeinc.jp/food/01088/、https://diet.relifeinc.jp/food/11288/）。民間サイトは二次情報であり独立した一次ソースとは扱わない。
+- **データ仕様を更新**：`official-foods.json` に `errataStatus`、`secondarySources`、`secondaryCheck` を追加し、ステータスを `OFFICIAL_PAGE_SECONDARY_MATCH` に変更。正誤表の行単位照合は未実施のため、両レコードの `errataStatus` は明示的に `NOT_ROW_CHECKED`。版情報は「公式個別ページ確認」とし、正誤表対応済みとの誤認を避ける。
+- **スキーマ／テストを拡張**：`food-data.schema.json` に二次情報と正誤表照合状態の仕様を追加。`official-foods.test.js` は件数を2件固定するのをやめ、ID・食品番号の一意性、100g基準、主要栄養値の数値範囲、出典URL、食品状態、検証日、二次照合状態、正誤表状態を検査する方式へ変更。`pwa.test.js` も別JSONの読込とオフラインキャッシュ参照を確認するよう変更。
+- **アプリへのデータ統合**：`app.js` は `./official-foods.json` を取得し、対応する食品の栄養値と出典情報を実行時に反映するよう変更。取得失敗時は既存の内蔵試作値へフォールバックするが、その値を公式確認済みと新たに表示するものではない。Service Workerの既存プリキャッシュに `official-foods.json` が含まれていることを再確認。実機ではなくコードとCIによる検証段階。
+- **新規食品の追加**：今回、根拠の取得・照合ができた既存2食品以外は追加していない。大規模データの収集・一括整合性確認は未実施。
+- **CI**：本更新により新しいGitHub Actions runが複数起動している。最終の `feature/macropilot-mvp` HEADに対応するrunを完了まで追跡し、成功・失敗の実測結果を下記に追記する。結果が出るまでは今回のコード変更全体をCI PASSと判定しない。
+- **未実施のまま**：CSV実取得・解析、2026年3月27日付正誤表の行単位照合、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開。
+- **保護境界**：変更先は `feature/macropilot-mvp` 内のみ。`main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更していない。MacroPilot MVPは未完成。
