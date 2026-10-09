@@ -2,8 +2,8 @@ const DB='macropilot-v1';
 const Nutrition=window.MacroNutrition;
 const localISODate=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
 const foods=[
-{id:'rice',name:'ご飯（炊飯後）',emoji:'🍚',unit:'g',base:150,kcal:234,p:3.8,c:55.7,f:.5},
-{id:'chicken',name:'鶏むね肉（皮なし・加熱）',emoji:'🍗',unit:'g',base:100,kcal:165,p:31,c:0,f:3.6},
+{id:'rice',name:'ご飯（炊飯後）',emoji:'🍚',unit:'g',base:100,kcal:156,p:2.5,c:37.1,f:.3,provenance:{status:'OFFICIAL_VERIFIED',edition:'日本食品標準成分表（八訂）増補2023年・正誤表対応',foodNumber:'01088',foodState:'炊飯後・精白米・うるち米',sourceUrl:'https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7',verifiedAt:'2026-10-10'}},
+{id:'chicken',name:'鶏むね肉（皮なし・焼き）',emoji:'🍗',unit:'g',base:100,kcal:177,p:38.8,c:.1,f:3.3,provenance:{status:'OFFICIAL_VERIFIED',edition:'日本食品標準成分表（八訂）増補2023年・正誤表対応',foodNumber:'11288',foodState:'若どり・むね・皮なし・焼き',sourceUrl:'https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=11_11288_7',verifiedAt:'2026-10-10'}},
 {id:'egg',name:'卵',emoji:'🥚',unit:'個',base:1,kcal:76,p:6.2,c:.2,f:5.2},
 {id:'natto',name:'納豆',emoji:'🫘',unit:'パック',base:1,kcal:90,p:7.4,c:5.4,f:4.5},
 {id:'tofu',name:'木綿豆腐',emoji:'◻️',unit:'g',base:150,kcal:110,p:10.5,c:2.1,f:6.3},
@@ -14,7 +14,7 @@ const foods=[
 {id:'broccoli',name:'ブロッコリー（ゆで）',emoji:'🥦',unit:'g',base:100,kcal:30,p:3.5,c:5.2,f:.4},
 {id:'protein',name:'プロテイン（標準例）',emoji:'🥛',unit:'回',base:1,kcal:120,p:24,c:3,f:2}
 ];
-// Prototype-only approximations; not a verified complete MEXT import.
+// Only foods with explicit OFFICIAL_VERIFIED provenance are sourced from MEXT. All other entries are prototype-only approximations.
 const recipes=[
 {id:'r1',name:'鶏むね肉プレート',emoji:'🍱',time:'15分',desc:'鶏むね肉・ご飯・ブロッコリー',ingredients:[['chicken',150],['rice',180],['broccoli',100]],steps:['鶏肉を中心まで十分に加熱する。','ご飯とブロッコリーを添える。']},
 {id:'r2',name:'鮭とご飯',emoji:'🐟',time:'12分',desc:'鮭・ご飯・ブロッコリー',ingredients:[['salmon',100],['rice',150],['broccoli',100]],steps:['鮭を中心まで加熱する。','ご飯とブロッコリーを盛り付ける。']},
