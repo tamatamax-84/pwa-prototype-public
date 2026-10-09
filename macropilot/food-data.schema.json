@@ -2,32 +2,128 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "MacroPilot food record with provenance",
   "type": "object",
-  "required": ["id","name","unit","base","nutrients","provenance"],
+  "required": [
+    "id",
+    "name",
+    "unit",
+    "base",
+    "nutrients",
+    "provenance"
+  ],
   "properties": {
-    "id": {"type":"string"},
-    "name": {"type":"string"},
-    "unit": {"type":"string"},
-    "base": {"type":"number","exclusiveMinimum":0,"description":"Quantity represented by the nutrient values; use 100 for per-100g records."},
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "base": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Quantity represented by the nutrient values; use 100 for per-100g records."
+    },
     "nutrients": {
-      "type":"object",
-      "required":["energyKcal","proteinG","carbohydrateG","fatG"],
+      "type": "object",
+      "required": [
+        "energyKcal",
+        "proteinG",
+        "carbohydrateG",
+        "fatG"
+      ],
       "properties": {
-        "energyKcal":{"type":"number","minimum":0},
-        "proteinG":{"type":"number","minimum":0},
-        "carbohydrateG":{"type":"number","minimum":0},
-        "fatG":{"type":"number","minimum":0}
+        "energyKcal": {
+          "type": "number",
+          "minimum": 0
+        },
+        "proteinG": {
+          "type": "number",
+          "minimum": 0
+        },
+        "carbohydrateG": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fatG": {
+          "type": "number",
+          "minimum": 0
+        }
       }
     },
     "provenance": {
-      "type":"object",
-      "required":["status","edition","sourceUrl","foodNumber","foodState","verifiedAt"],
+      "type": "object",
+      "required": [
+        "status",
+        "edition",
+        "sourceUrl",
+        "foodNumber",
+        "foodState",
+        "verifiedAt",
+        "errataStatus",
+        "secondarySources",
+        "secondaryCheck"
+      ],
       "properties": {
-        "status":{"enum":["OFFICIAL_VERIFIED","SAMPLE_UNVERIFIED"]},
-        "edition":{"type":["string","null"]},
-        "sourceUrl":{"type":["string","null"]},
-        "foodNumber":{"type":["string","null"]},
-        "foodState":{"type":"string"},
-        "verifiedAt":{"type":["string","null"],"format":"date"}
+        "status": {
+          "enum": [
+            "OFFICIAL_PAGE_SECONDARY_MATCH",
+            "OFFICIAL_PAGE_ONLY",
+            "CSV_ROW_VERIFIED",
+            "SAMPLE_UNVERIFIED"
+          ]
+        },
+        "edition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "foodNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "foodState": {
+          "type": "string"
+        },
+        "verifiedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "errataStatus": {
+          "enum": [
+            "ROW_CHECKED",
+            "DATABASE_HISTORY_ONLY",
+            "NOT_ROW_CHECKED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "secondarySources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "secondaryCheck": {
+          "enum": [
+            "FOOD_NUMBER_STATE_AND_CORE_NUTRIENTS_MATCH",
+            "MISMATCH",
+            "NOT_CHECKED"
+          ]
+        }
       }
     }
   }
