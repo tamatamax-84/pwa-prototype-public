@@ -1,4 +1,52 @@
 [
-  {"id":"rice","name":"ご飯（炊飯後）","unit":"g","base":100,"nutrients":{"energyKcal":156,"proteinG":2.5,"carbohydrateG":37.1,"fatG":0.3},"provenance":{"status":"OFFICIAL_VERIFIED","edition":"日本食品標準成分表（八訂）増補2023年・正誤表対応","sourceUrl":"https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7","foodNumber":"01088","foodState":"炊飯後・精白米・うるち米","verifiedAt":"2026-10-10"}},
-  {"id":"chicken","name":"鶏むね肉（皮なし・焼き）","unit":"g","base":100,"nutrients":{"energyKcal":177,"proteinG":38.8,"carbohydrateG":0.1,"fatG":3.3},"provenance":{"status":"OFFICIAL_VERIFIED","edition":"日本食品標準成分表（八訂）増補2023年・正誤表対応","sourceUrl":"https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=11_11288_7","foodNumber":"11288","foodState":"若どり・むね・皮なし・焼き","verifiedAt":"2026-10-10"}}
+  {
+    "id": "rice",
+    "name": "ご飯（炊飯後）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 156,
+      "proteinG": 2.5,
+      "carbohydrateG": 37.1,
+      "fatG": 0.3
+    },
+    "provenance": {
+      "status": "OFFICIAL_PAGE_SECONDARY_MATCH",
+      "edition": "日本食品標準成分表（八訂）増補2023年（公式個別ページ確認）",
+      "sourceUrl": "https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7",
+      "foodNumber": "01088",
+      "foodState": "炊飯後・精白米・うるち米",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/01088/"
+      ],
+      "secondaryCheck": "FOOD_NUMBER_STATE_AND_CORE_NUTRIENTS_MATCH"
+    }
+  },
+  {
+    "id": "chicken",
+    "name": "鶏むね肉（皮なし・焼き）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 177,
+      "proteinG": 38.8,
+      "carbohydrateG": 0.1,
+      "fatG": 3.3
+    },
+    "provenance": {
+      "status": "OFFICIAL_PAGE_SECONDARY_MATCH",
+      "edition": "日本食品標準成分表（八訂）増補2023年（公式個別ページ確認）",
+      "sourceUrl": "https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=11_11288_7",
+      "foodNumber": "11288",
+      "foodState": "若どり・むね・皮なし・焼き",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/11288/"
+      ],
+      "secondaryCheck": "FOOD_NUMBER_STATE_AND_CORE_NUTRIENTS_MATCH"
+    }
+  }
 ]
