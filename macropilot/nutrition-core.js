@@ -1,0 +1,8 @@
+(function(root,factory){const api=factory();if(typeof module==="object"&&module.exports)module.exports=api;else root.MacroNutrition=api})(typeof globalThis!=="undefined"?globalThis:this,function(){
+"use strict";
+function scale(food,amount){if(!food||!Number.isFinite(Number(amount))||Number(amount)<0||!Number.isFinite(Number(food.base))||Number(food.base)<=0)throw new TypeError("Invalid food or amount");const ratio=Number(amount)/Number(food.base);return{kcal:Number(food.kcal)*ratio,p:Number(food.p)*ratio,c:Number(food.c)*ratio,f:Number(food.f)*ratio}}
+function sum(entries,foods,foodKey="food",amountKey="amount"){const byId=new Map(foods.map(f=>[f.id,f]));return entries.reduce((acc,e)=>{const f=byId.get(e[foodKey]);if(!f)throw new TypeError("Unknown food id: "+e[foodKey]);const v=scale(f,e[amountKey]);for(const k of ["kcal","p","c","f"])acc[k]+=v[k];return acc},{kcal:0,p:0,c:0,f:0})}
+function remaining(goal,eaten){return{kcal:Number(goal.kcal)-Number(eaten.kcal),p:Number(goal.p)-Number(eaten.p),c:Number(goal.c)-Number(eaten.c),f:Number(goal.f)-Number(eaten.f)}}
+function validateBackup(data,knownFoodIds){if(!data||typeof data!=="object"||!data.goals||!Array.isArray(data.logs))return false;const g=data.goals;if(!["bulk","cut","maintain"].includes(g.type))return false;for(const k of ["kcal","p","c","f"])if(!Number.isFinite(Number(g[k]))||Number(g[k])<0)return false;const ids=new Set(knownFoodIds);return data.logs.every(l=>l&&typeof l==="object"&&ids.has(l.food)&&Number.isFinite(Number(l.amount))&&Number(l.amount)>0&&typeof l.meal==="string"&&["朝食","昼食","夕食","間食"].includes(l.meal))}
+return Object.freeze({scale,sum,remaining,validateBackup});
+});
