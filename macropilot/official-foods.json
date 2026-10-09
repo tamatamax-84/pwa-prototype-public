@@ -223,5 +223,180 @@
       ],
       "secondaryCheck": "NOT_CHECKED"
     }
+  },
+  {
+    "id": "pasta_dry",
+    "name": "スパゲッティ・マカロニ（乾）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 347,
+      "proteinG": 12.9,
+      "carbohydrateG": 73.1,
+      "fatG": 1.8
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/01063/",
+      "foodNumber": "01063",
+      "foodState": "スパゲッティ・マカロニ・乾",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/01063/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "eggplant_raw",
+    "name": "なす（生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 18,
+      "proteinG": 1.1,
+      "carbohydrateG": 5.1,
+      "fatG": 0.1
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06191/",
+      "foodNumber": "06191",
+      "foodState": "なす・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06191/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "daikon_raw",
+    "name": "大根（皮なし・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 15,
+      "proteinG": 0.4,
+      "carbohydrateG": 4.1,
+      "fatG": 0.1
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06134/",
+      "foodNumber": "06134",
+      "foodState": "だいこん・皮なし・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06134/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "pork_loin_raw",
+    "name": "豚ロース（脂身つき・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 248,
+      "proteinG": 19.3,
+      "carbohydrateG": 0.2,
+      "fatG": 19.2
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/11123/",
+      "foodNumber": "11123",
+      "foodState": "ぶた・ロース・脂身つき・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/11123/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "tempeh",
+    "name": "テンペ",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 180,
+      "proteinG": 15.8,
+      "carbohydrateG": 15.4,
+      "fatG": 9
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/04063/",
+      "foodNumber": "04063",
+      "foodState": "テンペ",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/04063/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "mitsuba_cut_raw",
+    "name": "三つ葉（切りみつば・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 16,
+      "proteinG": 1,
+      "carbohydrateG": 4,
+      "fatG": 0.1
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06274/",
+      "foodNumber": "06274",
+      "foodState": "切りみつば・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06274/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "strong_flour",
+    "name": "強力粉",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 337,
+      "proteinG": 11.8,
+      "carbohydrateG": 71.7,
+      "fatG": 1.5
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/01020/",
+      "foodNumber": "01020",
+      "foodState": "こむぎ・強力粉",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/01020/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
   }
 ]
