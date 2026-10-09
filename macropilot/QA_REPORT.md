@@ -191,3 +191,11 @@
 - **修正と再検証**：`official-foods.test.js` の件数期待値を26に変更し、新規10件の食品番号・出典URL・4栄養値・未検証ステータスを追加したテストcommit `ce6a8d263926a66ce35d8a737a7d05c893e98ec5` の [Run #38000542751](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000542751) は、job `validate`（ID `114057266417`）および全stepが `completed / success` と確認。Actions run本体は最終照会時点で `in_progress` 表示のままなので、run全体の完了状態は未確定として保持する。
 - **最新レポートcommit**：本追記commit `39be802148e2aa3aed818274cd530e68890e9391` のActions [Run #38000559791](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000559791) も完了まで追跡する。job完了表示だけでrun全体の最終状態を代替しない。
 - **現時点の品質状態**：26件のデータレコードと対応する個別値アサーションを追加。二次情報24件は引き続き未検証ラベルを保持。公式ページ照合済みは2件のみ。MVPは未完成。
+
+
+## 最終CI結果更新（2026-10-10・26食品データ）
+- **PASS**：テストcommit `ce6a8d263926a66ce35d8a737a7d05c893e98ec5` の [Run #38000542751](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000542751) は `completed / success`。JavaScript syntax、Nutrition and backup validation tests、JSON validation、全後処理ステップ成功。
+- **PASS**：QAレポート追記commit `39be802148e2aa3aed818274cd530e68890e9391` の [Run #38000559791](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000559791) は `completed / success`。全step成功。
+- **PASS**：Recovery状況追記commit `127404068cf887372df0a8883facfbe8d4214fbc` の [Run #38000612123](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000612123) は `completed / success`。ジョブ `validate` と JavaScript syntax、Nutrition and backup validation tests、JSON validation、全後処理ステップ成功。
+- **FAILを保持**：食品データcommit `d6d673f6988d347e3d43d7a5331cbef023f8c937` の [Run #38000529805](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000529805) は件数テスト期待値の更新漏れにより失敗。後続テストcommitで期待値26へ修正し、その後のRun #38000542751とRun #38000559791、Run #38000612123は成功。失敗履歴は削除せずRecovery記録として保持する。
+- **最新レポート追記CI**：本追記commitのActions runを確認し、completed/successとなるまで当該commitのCI PASSを宣言しない。
