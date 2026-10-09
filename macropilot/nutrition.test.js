@@ -1,8 +1,15 @@
-// Arithmetic acceptance test for the prototype's formula (run: node nutrition.test.js)
 const assert=require('node:assert/strict');
-const n=(food,amount)=>{const x=amount/food.base;return {kcal:food.kcal*x,p:food.p*x,c:food.c*x,f:food.f*x}};
-const chicken={base:100,kcal:165,p:31,c:0,f:3.6};
-const rice={base:150,kcal:234,p:3.8,c:55.7,f:.5};
-assert.deepEqual(n(chicken,150),{kcal:247.5,p:46.5,c:0,f:5.4});
-assert.deepEqual(n(rice,300),{kcal:468,p:7.6,c:111.4,f:1});
-console.log('PASS: 2 nutrition scaling arithmetic tests');
+const N=require('./nutrition-core.js');
+const foods=[{id:'chicken',base:100,kcal:165,p:31,c:0,f:3.6},{id:'rice',base:150,kcal:234,p:3.8,c:55.7,f:.5}];
+assert.deepEqual(N.scale(foods[0],150),{kcal:247.5,p:46.5,c:0,f:5.4});
+assert.deepEqual(N.scale(foods[1],300),{kcal:468,p:7.6,c:111.4,f:1});
+const meal=N.sum([{food:'chicken',amount:150},{food:'rice',amount:300}],foods);
+assert.deepEqual(meal,{kcal:715.5,p:54.1,c:111.4,f:6.4});
+assert.deepEqual(N.remaining({kcal:2200,p:140,c:250,f:60},{kcal:715.5,p:54.1,c:111.4,f:6.4}),{kcal:1484.5,p:85.9,c:138.6,f:53.6});
+const good={goals:{type:'bulk',kcal:2200,p:140,c:250,f:60},logs:[{food:'rice',amount:150,meal:'朝食'}]};
+assert.equal(N.validateBackup(good,['rice','chicken']),true);
+assert.equal(N.validateBackup({...good,logs:[{food:'missing',amount:1,meal:'朝食'}]},['rice','chicken']),false);
+assert.equal(N.validateBackup({...good,logs:[{food:'rice',amount:-1,meal:'朝食'}]},['rice','chicken']),false);
+assert.equal(N.validateBackup({...good,goals:{...good.goals,kcal:'bad'}},['rice','chicken']),false);
+assert.throws(()=>N.scale(foods[0],-1),TypeError);
+console.log('PASS: 9 nutrition, aggregation, remaining-target, and backup-validation assertions');
