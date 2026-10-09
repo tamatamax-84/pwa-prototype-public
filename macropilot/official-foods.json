@@ -848,5 +848,105 @@
       ],
       "secondaryCheck": "NOT_CHECKED"
     }
+  },
+  {
+    "id": "banana_raw",
+    "name": "バナナ（生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 93,
+      "proteinG": 1.1,
+      "carbohydrateG": 22.5,
+      "fatG": 0.2
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1018&page=102",
+      "foodNumber": "07107",
+      "foodState": "バナナ・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1018&page=102"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "mandarin_orange_sajo_raw",
+    "name": "うんしゅうみかん（砂じょう・普通・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 49,
+      "proteinG": 0.7,
+      "carbohydrateG": 11.5,
+      "fatG": 0.1
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=920&page=92",
+      "foodNumber": "07029",
+      "foodState": "うんしゅうみかん・砂じょう・普通・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=920&page=92"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "soy_sauce_regular",
+    "name": "こいくちしょうゆ",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 76,
+      "proteinG": 7.7,
+      "carbohydrateG": 7.9,
+      "fatG": 0
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2343&page=235",
+      "foodNumber": "17007",
+      "foodState": "調味料類・しょうゆ類・こいくちしょうゆ",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2343&page=235"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "rice_miso_light_salty",
+    "name": "米みそ（淡色辛みそ）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 182,
+      "proteinG": 12.5,
+      "carbohydrateG": 21.9,
+      "fatG": 6
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2431&page=244",
+      "foodNumber": "17045",
+      "foodState": "調味料類・みそ類・米みそ・淡色辛みそ",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=2431&page=244"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
   }
 ]
