@@ -1,8 +1,31 @@
-const assert=require('node:assert/strict');
-const fs=require('node:fs');
-const foods=JSON.parse(fs.readFileSync('official-foods.json','utf8'));
-assert.equal(foods.length,2);
-const rice=foods.find(f=>f.id==='rice');assert.equal(rice.provenance.foodNumber,'01088');assert.equal(rice.nutrients.energyKcal,156);assert.equal(rice.nutrients.carbohydrateG,37.1);
-const chicken=foods.find(f=>f.id==='chicken');assert.equal(chicken.provenance.foodNumber,'11288');assert.equal(chicken.nutrients.energyKcal,177);assert.equal(chicken.nutrients.proteinG,38.8);assert.equal(chicken.nutrients.fatG,3.3);
-for(const f of foods){assert.equal(f.provenance.status,'OFFICIAL_VERIFIED');assert.ok(f.provenance.sourceUrl.startsWith('https://fooddb.mext.go.jp/'));assert.ok(f.provenance.foodState);assert.equal(f.base,100)}
-console.log('PASS: 16 official food provenance and nutrient assertions');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const foods = JSON.parse(fs.readFileSync('official-foods.json', 'utf8'));
+const schema = JSON.parse(fs.readFileSync('food-data.schema.json', 'utf8'));
+const required = schema.required;
+const nutrientKeys = ['energyKcal', 'proteinG', 'carbohydrateG', 'fatG'];
+assert.ok(Array.isArray(foods) && foods.length > 0, 'food dataset must not be empty');
+const ids = new Set();
+const foodNumbers = new Set();
+for (const food of foods) {
+  for (const key of required) assert.ok(Object.hasOwn(food, key), food.id + ': missing ' + key);
+  assert.ok(food.id && !ids.has(food.id), 'food IDs must be unique: ' + food.id); ids.add(food.id);
+  assert.equal(food.base, 100, food.id + ': this dataset stores per-100g values');
+  assert.ok(food.name.trim() && food.unit === 'g', food.id + ': food name and gram unit required');
+  for (const key of nutrientKeys) assert.ok(Number.isFinite(food.nutrients[key]) && food.nutrients[key] >= 0, food.id + ': invalid ' + key);
+  const p = food.provenance;
+  assert.ok(schema.properties.provenance.properties.status.enum.includes(p.status), food.id + ': invalid provenance status');
+  assert.ok(p.sourceUrl.startsWith('https://fooddb.mext.go.jp/details/'), food.id + ': official individual page required');
+  assert.ok(/^\d{5}$/.test(p.foodNumber), food.id + ': food number must be five digits');
+  assert.ok(p.foodState.trim(), food.id + ': food state required');
+  assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(p.verifiedAt), food.id + ': verifiedAt must be ISO date');
+  assert.ok(['ROW_CHECKED','DATABASE_HISTORY_ONLY','NOT_ROW_CHECKED','NOT_APPLICABLE'].includes(p.errataStatus), food.id + ': errata status required');
+  assert.ok(Array.isArray(p.secondarySources), food.id + ': secondarySources must be an array');
+  assert.ok(['FOOD_NUMBER_STATE_AND_CORE_NUTRIENTS_MATCH','MISMATCH','NOT_CHECKED'].includes(p.secondaryCheck), food.id + ': secondary check status required');
+  if (p.status === 'OFFICIAL_PAGE_SECONDARY_MATCH') assert.ok(p.secondarySources.length > 0 && p.secondaryCheck === 'FOOD_NUMBER_STATE_AND_CORE_NUTRIENTS_MATCH', food.id + ': secondary match status needs evidence');
+  if (foodNumbers.has(p.foodNumber)) throw new Error('duplicate food number: ' + p.foodNumber);
+  foodNumbers.add(p.foodNumber);
+}
+const rice=foods.find(f=>f.id==='rice'); assert.ok(rice, 'rice record retained'); assert.equal(rice.provenance.foodNumber,'01088'); assert.equal(rice.nutrients.energyKcal,156); assert.equal(rice.nutrients.carbohydrateG,37.1);
+const chicken=foods.find(f=>f.id==='chicken'); assert.ok(chicken, 'chicken record retained'); assert.equal(chicken.provenance.foodNumber,'11288'); assert.equal(chicken.nutrients.energyKcal,177); assert.equal(chicken.nutrients.proteinG,38.8); assert.equal(chicken.nutrients.fatG,3.3);
+console.log('PASS: ' + foods.length + ' food records validated for unique IDs/numbers, per-100g nutrients, provenance, secondary checks, and errata status');
