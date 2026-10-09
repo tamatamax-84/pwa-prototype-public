@@ -153,3 +153,9 @@
 - テストcommit `9068f6c281a0313e76be30745343de2e2190de55` の [Run #37970813317](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970813317) は失敗。ログで二次情報ステータスのallowlist不一致を確認した。
 - Recoveryとして `official-foods.test.js` のステータスallowlistを修正し、`SECONDARY_SOURCE_UNVERIFIED` を許可対象に追加した。修正commit `5dc50fd5aacbf4a14e881d7bb49f4469e5d16a56` のActions結果は未確認のため、修正後CIが成功するまで食品データ拡充QAをPASSとしない。
 - 本レポート更新commit `484e2027d683c01488d507da1c52b9f56b3c0385` はRunの検索時点でまだ一覧に現れず、Actions実行確認未取得。
+## 食品データ第2バッチ（2026-10-10・さらに7件追加）
+- データセットは合計 **16件**（公式個別ページ照合済み2件＋二次情報のみ14件）に拡張した。追加分はすべて `SECONDARY_SOURCE_UNVERIFIED`、`secondaryCheck=NOT_CHECKED`、`errataStatus=NOT_ROW_CHECKED` を保持する。
+- 追加食品：スパゲッティ・マカロニ（乾）01063（347 kcal/P12.9/C73.1/F1.8、https://diet.relifeinc.jp/food/01063/）、なす（生）06191（18/P1.1/C5.1/F0.1、https://diet.relifeinc.jp/food/06191/）、大根（皮なし・生）06134（15/P0.4/C4.1/F0.1、https://diet.relifeinc.jp/food/06134/）、豚ロース（脂身つき・生）11123（248/P19.3/C0.2/F19.2、https://diet.relifeinc.jp/food/11123/）、テンペ04063（180/P15.8/C15.4/F9.0、https://diet.relifeinc.jp/food/04063/）、三つ葉（切りみつば・生）06274（16/P1.0/C4.0/F0.1、https://diet.relifeinc.jp/food/06274/）、強力粉01020（337/P11.8/C71.7/F1.5、https://diet.relifeinc.jp/food/01020/）。栄養値は各二次情報ページに表示された100gあたり値。
+- 第2バッチデータcommit `ba7a32cc5bce7c12b2beeb8b0557ae5aec12d039`、対応テストcommit `dfb63a3f75c5370138dead126f138e9c19ed1f84`。最新テストは16件すべてのID・食品番号一意性、主要栄養値、出典URL、検証状態を検査する。CI結果は別途追跡中。
+- **Recovery後のCI**：status allowlist修正commit `5dc50fd5aacbf4a14e881d7bb49f4469e5d16a56` のRun #37970889384、およびそのQAレポートcommit `2ded6c4fca54a8092db8136dfaea959c2cd84b4f` のRun #37970903964 は、最終確認時点でともに `in_progress`。nutrition/backup validationステップが実行中表示のままのため、成功を宣言しない。
+- 二次情報データは検索・食事記録のカバレッジ拡大用の暫定データ。健康判断や厳密な栄養管理の根拠として公式照合済みと同等に扱わない。食品状態の曖昧さ、ブランド品、調理油・調味料込みの料理は別レコードとして分離し、異なる状態の数値を混ぜない。
