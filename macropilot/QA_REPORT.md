@@ -115,3 +115,15 @@
 - **実機・公開ゲート**：iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開は今回も未実施／未確認。Chromium自動テストから実機PASSを推定しない。
 - **保護境界の再確認**：feature/macropilot-mvp のHEADは f186a7b19aeae8bacb1c77363b6579edcd2a2787。main と baseline/pwa-foundation-v1.0 の index.html SHA（3f9089932743669250e70e10648b4e5d5a65733a）、app.js SHA（aeb20927afa365bcc167d5ba05ce43e4d30cfad3）、manifest.json SHA（137f45e1abc13bd345cc33044c02dea4b5a0a9f1）は各々一致。Canonical OSは tamatamax-84/AI-TEAM-NEXUS/main/OS/AI_TEAM_HQ_OS.md からロードし、v3.0 Compact / ACTIVE / CANONICAL YESとRepository・Pathを検証。Canonical OSへの書き込みなし。
 - **完成判定**：CSV実取得、正誤表行単位照合、大規模食品データ整合性QA、実機・公開ゲートが未解決のため、MacroPilot MVPは引き続き**未完成**。本追記後のCI結果は別途Runを確認し、完了前にPASSと判定しない。
+
+## 代替QA追記（2026-10-10・公式個別ページ全栄養値照合／テスト強化）
+- **公式個別ページ照合：2/2件を確認**（対象は現在 official-foods.json にある全2件）。公式ページは日本食品標準成分表（八訂）増補2023年のページであることを確認。
+- **rice**：食品番号 `01088`。公式食品名は「穀類/こめ/［水稲めし］/精白米/うるち米」。MacroPilotの食品状態「炊飯後・精白米・うるち米」と意味が一致。公式ページの可食部100g値はエネルギー156 kcal、たんぱく質2.5g、脂質0.3g、炭水化物37.1g。登録済み4値すべて一致。一次ソース：https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7
+- **chicken**：食品番号 `11288`。公式食品名は「肉類/＜鳥肉類＞/にわとり/［若どり・主品目］/むね/皮なし/焼き」。MacroPilotの食品状態「若どり・むね・皮なし・焼き」と意味が一致。公式ページの可食部100g値はエネルギー177 kcal、たんぱく質38.8g、脂質3.3g、炭水化物0.1g。登録済み4値すべて一致。一次ソース：https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=11_11288_7
+- **照合範囲の制約**：今回の登録済み栄養値4項目（エネルギー、たんぱく質、炭水化物、脂質）を両食品で照合した。公式ページの全栄養素をMacroPilotへ登録したわけではなく、全栄養素の一括比較ではない。民間二次情報の一致を一次ソースとして数えていない。
+- **正誤表の代替経路で新たに確認した事実**：文部科学省食品成分データベースの公式更新履歴は、2026年6月9日に「日本食品標準成分表（八訂）増補2023年」について、令和8年3月27日公表の正誤表に対応したと明記している：https://fooddb.mext.go.jp/history.pl 。これは、現行の個別ページがそのデータベース更新後の表示であることを裏付ける。ただし、正誤表Excelの取得・各行の食品番号照合・変更前後のセル比較は実施していない。したがって両食品の errataStatus は引き続き NOT_ROW_CHECKED であり、正誤表行単位QAはPASSではない。公式の正誤表HTML一覧 https://fooddb.mext.go.jp/help/errata.html も確認したが、これは過年度の訂正一覧を含むページであり、2026年3月27日付の該当Excelの行照合を代替しない。
+- **自動テストを強化**：official-foods.test.js に、2件の食品番号・公式URL・食品状態・100g基準・登録済み4栄養値すべての完全一致を検証するアサーションを追加。食品件数が将来増えても、全レコードの一意性・出典・検証状態チェックを維持する。
+- **栄養計算・バックアップテストを強化**：nutrition.test.js に、0g計算、NaN/Infinity、不正な食品基準量、null食品、未知食品ID、0以下の食事量、不正な食事区分、不正バックアップ量・食事区分・目標値・logs形式などの境界テストを追加。これらは公式データ取得に依存しないロジック検証。
+- **更新commitとCI**：公式食品照合テスト更新commit `432e266489021b162e18f8424c58624ff7e9378f`。栄養・バックアップテスト更新commit `b528873bb37d665ca8386968e7b03bc76ae919eb`。両commitのActions結果と、QAレポート更新commitのActions結果を別途追跡し、完了・成功するまでは今回の更新全体をCI PASSと判定しない。
+- **未解決**：CSV実取得・解析、2026年3月27日付正誤表の行単位照合、全食品データの網羅性・大規模整合性QA、iPhone実機Safari、ホーム画面追加、実機オフライン起動・復帰・再接続、HTTPS公開。MacroPilot MVPは未完成。
+- **保護境界**：コード更新先は feature/macropilot-mvp の macropilot/official-foods.test.js と macropilot/nutrition.test.js のみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更していない。
