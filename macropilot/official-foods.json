@@ -823,5 +823,30 @@
       ],
       "secondaryCheck": "NOT_CHECKED"
     }
+  },
+  {
+    "id": "apple_skin_raw",
+    "name": "りんご（皮つき・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 56,
+      "proteinG": 0.2,
+      "carbohydrateG": 16.2,
+      "fatG": 0.3
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Seibun! secondary nutrition data page (official individual page not independently checked)",
+      "sourceUrl": "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1059&page=106",
+      "foodNumber": "07176",
+      "foodState": "りんご・皮つき・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1059&page=106"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
   }
 ]
