@@ -823,30 +823,5 @@
       ],
       "secondaryCheck": "NOT_CHECKED"
     }
-  },
-  {
-    "id": "kinako",
-    "name": "きな粉",
-    "unit": "g",
-    "base": 100,
-    "nutrients": {
-      "energyKcal": 451,
-      "proteinG": 36.7,
-      "carbohydrateG": 28.5,
-      "fatG": 25.7
-    },
-    "provenance": {
-      "status": "SECONDARY_SOURCE_UNVERIFIED",
-      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables; official individual page not independently checked",
-      "sourceUrl": "https://diet.relifeinc.jp/food/04029/",
-      "foodNumber": "04029",
-      "foodState": "大豆・きな粉",
-      "verifiedAt": "2026-10-10",
-      "errataStatus": "NOT_ROW_CHECKED",
-      "secondarySources": [
-        "https://diet.relifeinc.jp/food/04029/"
-      ],
-      "secondaryCheck": "NOT_CHECKED"
-    }
   }
 ]
