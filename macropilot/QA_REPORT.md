@@ -16,6 +16,7 @@
 - manifestと食品スキーマのJSON parse：PASS。
 - **PASS（更新確認）**：前回確認時に停滞中だったrun `37966393204` は、再確認時に `completed / success` となり、JavaScript syntax、Nutrition and backup validation tests、JSON validationの全工程が成功していました。ジョブログURLは引き続き `404 BlobNotFound` で本文を取得できませんでしたが、GitHub Actionsのジョブ・ステップ状態は成功を示しています。停滞は解消しており、ログ取得障害だけでは失敗原因を示す証拠になりません。
 - **PASS（最新QAレポート更新commit）**：このQAレポート更新前のcommit `63f5700d08c0e3e71d3de2806a99da2bad5f212c` に対するrun `37966702802` は `completed / success`。レポートを今回更新したため、この更新commit自体のCI結果は新しいActions runで別途確認が必要です。
+- **実行中（このレポート更新後のCI）**：QAレポートを更新したcommit `e7fd240322affaf31592738d568d9a98af468a3c` に対するrun [37966884990](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37966884990) は確認時点で `in_progress`。JavaScript syntaxは成功、Nutrition and backup validation testsは実行中、JSON validationは未開始。最新のQAレポート更新コミットについては、完了結果が得られるまでCI PASSと判定しません。
 
 ## Service Worker / Offline
 - **PASS（自動ブラウザシミュレーション）**：キャッシュ名は `macropilot-shell-v2`。`./official-foods.json` はプリキャッシュ対象に追加済み。PWA静的テストで公式食品データを含むキャッシュ資産の存在を確認。
