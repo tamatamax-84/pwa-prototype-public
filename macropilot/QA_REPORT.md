@@ -246,3 +246,11 @@
 - **出典差異の扱い**：Seibun!では「うんしゅうみかん・砂じょう・早生」と「普通」は別の食品状態・食品番号として掲載され、値も異なるため、状態を混在させず普通の値のみ採用。これは同一食品状態の出典間矛盾と断定しない。今回、同一食品状態の独立した複数出典比較は未実施であり、競合値が不存在とは結論しない。
 - **未解決ゲート**：公式CSVの実取得・解析、2026-03-27正誤表の行単位照合、同一食品状態での複数出典比較、データセット網羅性・大規模整合性QA、追加果物・調味料・加工食品の拡張、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未完了。MacroPilot MVPは**未完成**。
 - **保護境界**：更新先は `feature/macropilot-mvp` の食品JSON、テスト、QAレポートのみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更しない。今回のデータcommit、テストcommit、QAレポートcommitのActionsをそれぞれ完了まで追跡し、各run本体の最終状態と全stepを記録する。
+
+
+## 38食品バッチのActions結果追記（2026-10-10）
+- **データcommitの失敗を記録**：`2ea2ac31b6034a1273deeb726eb0278a1ee1139f` の [Run #38001512054](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001512054) は `completed / failure`。job `validate`（ID `114060425941`）。JavaScript syntaxは成功したが、Nutrition and backup validation tests内の `official-foods.test.js` が旧期待件数34と実データ38の不一致（`38 !== 34`）で失敗し、JSON validationはskip。栄養値そのものの不一致を示す失敗ではなく、データcommitと件数テスト更新を別commitに分けたことによる一時的な件数期待値の更新漏れ。ログを確認済み。
+- **修正commit**：`b64ce2a2acbedd813cced73c5f1a62380ebbda1c` は4食品の個別期待値と件数38へ更新。対応する [Run #38001526568](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001526568) は最終照会時点で `in_progress`、job `validate`（ID `114060472858`）のJavaScript syntaxは成功、Nutrition and backup validation testsが実行中で、JSON validationと後処理はpending。run本体の結論は未確定として保持し、完了前にPASSとは扱わない。
+- **QAレポートcommitのActions**：この追記commit `e4985308054a66af1ba65d2f291aa4ba8ebd6509` の [Run #38001545451](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001545451) は `completed / success`。job `validate`（ID `114060534590`）およびJavaScript syntax、Nutrition and backup validation tests、JSON validation、post setup-node、post checkout、Complete jobの全stepが成功。
+- **食品状態と競合値**：普通うんしゅうみかん（07029）と早生うんしゅうみかん（07028）は出典で異なる食品番号・状態として掲載され、値が異なる。別状態として扱い、普通のレコードに早生の値を混ぜていない。同一状態の複数ソース照合はまだ実施していないため、未解決の出典競合はUNKNOWNとして扱う。
+- **データ現状**：38件、公式個別ページ照合済み2件、未検証二次情報36件。追加4件はすべて `SECONDARY_SOURCE_UNVERIFIED` のまま。MVPは未完成。
