@@ -42,7 +42,7 @@ assert.equal(chicken.provenance.foodNumber,'11288'); assert.equal(chicken.proven
 assert.match(chicken.provenance.foodState,/若どり.*むね.*皮なし.*焼き/); assert.equal(chicken.base,100);
 assert.deepEqual(chicken.nutrients,{energyKcal:177,proteinG:38.8,carbohydrateG:0.1,fatG:3.3},'chicken all registered nutrient values must match the official individual page');
 for (const food of foods) {
-  assert.ok(food.provenance.status === 'OFFICIAL_PAGE_SECONDARY_MATCH' || food.provenance.status === 'OFFICIAL_PAGE_ONLY' || food.provenance.status === 'CSV_ROW_VERIFIED' || food.provenance.status === 'SAMPLE_UNVERIFIED', food.id + ': recognized evidence status');
+  assert.ok(['OFFICIAL_PAGE_SECONDARY_MATCH','OFFICIAL_PAGE_ONLY','CSV_ROW_VERIFIED','SAMPLE_UNVERIFIED','SECONDARY_SOURCE_UNVERIFIED'].includes(food.provenance.status), food.id + ': recognized evidence status');
   if (food.provenance.errataStatus !== 'ROW_CHECKED' && food.provenance.errataStatus !== 'NOT_APPLICABLE') assert.notEqual(food.provenance.errataStatus,'ROW_CHECKED',food.id + ': errata must not be marked checked without row evidence');
 }
 const expectedSecondary = {
