@@ -25,10 +25,16 @@ jobs:
           node --check nutrition.test.js
           node --check sw.js
           node --check pwa.test.js
+          node --check browser.test.cjs
+          node --check official-foods.test.js
       - name: Nutrition and backup validation tests
         run: |
           node nutrition.test.js
           node pwa.test.js
+          node official-foods.test.js
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+          node browser.test.cjs
       - name: JSON validation
         run: |
           node -e "JSON.parse(require('fs').readFileSync('manifest.json','utf8'))"
