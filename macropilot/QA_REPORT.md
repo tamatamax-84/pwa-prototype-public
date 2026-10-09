@@ -199,3 +199,22 @@
 - **PASS**：Recovery状況追記commit `127404068cf887372df0a8883facfbe8d4214fbc` の [Run #38000612123](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000612123) は `completed / success`。ジョブ `validate` と JavaScript syntax、Nutrition and backup validation tests、JSON validation、全後処理ステップ成功。
 - **FAILを保持**：食品データcommit `d6d673f6988d347e3d43d7a5331cbef023f8c937` の [Run #38000529805](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000529805) は件数テスト期待値の更新漏れにより失敗。後続テストcommitで期待値26へ修正し、その後のRun #38000542751とRun #38000559791、Run #38000612123は成功。失敗履歴は削除せずRecovery記録として保持する。
 - **最新レポート追記CI**：本追記commitのActions runを確認し、completed/successとなるまで当該commitのCI PASSを宣言しない。
+
+
+## 果物・加工食品・穀類データ追加（2026-10-10）
+- **指定run追跡完了**：QAレポート更新commit `82bd9c5fcf8dbfbddb54f064471598b164ab3b99` の [Run #38000686148](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38000686148) は `completed / success`。job `validate`（ID `114057732179`）と JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理を含む全stepが成功。これによりrun本体の最終状態も確認済み。
+- **現在のデータ件数**：34件。公式個別ページとの照合済み2件、二次情報のみ32件。二次情報のレコードは `SECONDARY_SOURCE_UNVERIFIED`、`secondaryCheck=NOT_CHECKED`、`errataStatus=NOT_ROW_CHECKED` を保持。
+- **今回の新規採用7件＋果物1件（100gあたり kcal / たんぱく質g / 炭水化物g / 脂質g）**：
+  - トマト缶（ホール・食塩無添加、液汁を除く）06184：21 / 0.9 / 4.4 / 0.2。https://diet.relifeinc.jp/food/06184/
+  - ボンレスハム 11175：115 / 18.7 / 1.8 / 4.0。https://diet.relifeinc.jp/food/11175/
+  - ロースハム 11176：211 / 18.6 / 2.0 / 14.5。https://diet.relifeinc.jp/food/11176/
+  - プロセスチーズ 13040：313 / 22.7 / 1.3 / 26.0。https://diet.relifeinc.jp/food/13040/
+  - 食パン 01026：248 / 8.9 / 46.4 / 4.1。https://diet.relifeinc.jp/food/01026/
+  - ホットケーキミックス 01024：360 / 7.8 / 74.4 / 4.0。https://diet.relifeinc.jp/food/01024/
+  - 春巻きの皮（生）01179：288 / 8.3 / 62.2 / 1.6。https://diet.relifeinc.jp/food/01179/
+  - りんご（皮つき・生）07176：56 / 0.2 / 16.2 / 0.3。https://eiyouseibun.sakura.ne.jp/nutrition_detail.php?NUTRITION_ID=1059&page=106
+- **値の採用基準**：エネルギー・たんぱく質・炭水化物・脂質が出典ページに明記されている場合のみ登録。きな粉（04029）は検索結果で4項目すべてを同時確認できず、推測混入を避けるためデータセットから除外。栄養値を推定補完しない。
+- **不一致管理**：出典ページ内に調理状態別の異なる値がある場合、状態が違う値は混ぜず別レコード候補として扱う。同一食品状態の複数出典による独立照合は今回未実施のため、競合値を確定・解消したとは扱わない。
+- **自動テスト**：`official-foods.test.js` に上記8件の食品番号・出典URL・栄養値・未検証状態の個別アサーションを追加。件数期待値を34件（公式照合2＋二次情報32）へ更新。各更新commitのActionsを個別に追跡し、失敗があれば理由を記録して後続commitで修正する。
+- **未解決ゲート**：果物カバレッジはりんご1件にとどまる。バナナ・柑橘類、調味料、追加加工食品の拡張、公式CSVの実取得・解析、正誤表行単位照合、同一食品状態の複数出典比較、網羅性・大規模整合性QA、iPhone実機Safari／ホーム画面追加／オフライン復帰・再接続、HTTPS公開は未完了。MacroPilot MVPは**未完成**。
+- **保護境界**：変更先は `feature/macropilot-mvp` の `macropilot/official-foods.json`、`macropilot/official-foods.test.js`、`macropilot/QA_REPORT.md` のみ。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更していない。
