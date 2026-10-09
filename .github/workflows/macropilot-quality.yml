@@ -1,0 +1,31 @@
+name: MacroPilot Quality Checks
+on:
+  push:
+    branches:
+      - feature/macropilot-mvp
+    paths:
+      - 'macropilot/**'
+      - '.github/workflows/macropilot-quality.yml'
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: macropilot
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check app.js
+          node --check nutrition-core.js
+          node --check nutrition.test.js
+      - name: Nutrition and backup validation tests
+        run: node nutrition.test.js
+      - name: JSON validation
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('manifest.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('food-data.schema.json','utf8'))"
