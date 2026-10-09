@@ -51,5 +51,22 @@ $('goalForm').addEventListener('submit',e=>{e.preventDefault();let g={type:$('ty
 $('clear').onclick=()=>{if(confirm('今日の記録をすべて削除しますか？')){state.logs=[];save();render()}};
 $('export').onclick=()=>{let a=document.createElement('a'),u=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.href=u;a.download='macropilot-backup.json';a.click();URL.revokeObjectURL(u)};
 $('import').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(!Nutrition.validateBackup(x,foods.map(f=>f.id)))throw Error('invalid backup');state={...defaults,...x,goals:{...defaults.goals,...x.goals}};save();render();toast('復元しました')}catch{toast('バックアップを読み込めません')}e.target.value=''};
+async function loadOfficialFoodData(){
+ try{
+  const response=await fetch('./official-foods.json',{cache:'no-cache'});
+  if(!response.ok)throw new Error('food data HTTP '+response.status);
+  const records=await response.json();
+  if(!Array.isArray(records))throw new TypeError('food data must be an array');
+  for(const record of records){
+   const target=foods.find(f=>f.id===record.id);
+   if(!target)continue;
+   const p=record.provenance||{};
+   if(!p.sourceUrl||!p.foodNumber||!p.foodState||!record.nutrients||record.base!==100)continue;
+   target.base=record.base;target.unit=record.unit;
+   target.kcal=record.nutrients.energyKcal;target.p=record.nutrients.proteinG;target.c=record.nutrients.carbohydrateG;target.f=record.nutrients.fatG;
+   target.provenance=p;
+  }
+ }catch(error){console.warn('Official food data file could not be loaded; using bundled prototype values.',error)}
+}
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-render();
+loadOfficialFoodData().finally(render);
