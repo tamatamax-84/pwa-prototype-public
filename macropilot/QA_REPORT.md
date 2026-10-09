@@ -92,3 +92,9 @@
 - **機能QAの範囲**：CIのPlaywright Chromiumテストは目標保存、食事追加・削除、日付切替、バックアップ、Service Workerによるオフラインシェル、オンライン復帰をPASS。これは自動Chromium試験であり、iPhone実機のSafari・ホーム画面追加・実機オフライン復帰のPASSではない。
 - **残課題**：CSV実取得・解析、2026年3月27日付正誤表の行単位照合、大規模食品データ収集と整合性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開は未実施／未確認。したがってMacroPilot MVPは未完成。
 - **保護境界**：変更は `feature/macropilot-mvp` 内のみ。 `main`、`baseline/pwa-foundation-v1.0)、Canonical OSリポジトリは変更していない。
+
+
+## 最終QA追跡（2026-10-10）
+- **PASS**：QAレポート更新commit `2471ef9e913a9f4969c14df3ee48bd2decaa2f9c` に対するRun [37968754942](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37968754942) を再確認。状態 `completed`、結論 `success`。Job `validate` と全ステップ（checkout、setup-node、JavaScript syntax、Nutrition and backup validation tests、JSON validation、後処理）が成功。
+- **保護境界の再確認**：`main` と `baseline/pwa-foundation-v1.0` の `index.html`、`app.js`、`manifest.json` のSHAはそれぞれ一致し、変更なし。Canonical OSは `tamatamax-84/AI-TEAM-NEXUS/main/OS/AI_TEAM_HQ_OS.md` をロードし、`OS_NAME=AI TEAM HQ OS`、`VERSION=v3.0 Compact`、`STATUS=ACTIVE`、`CANONICAL=YES`、Repository／Pathが指定値であることを確認。Canonical OSへの書き込みなし。
+- **完成判定**：CI PASSは現HEADの自動検証結果であり、外部・実機ゲートを代替しない。CSV実取得・解析、2026-03-27正誤表の行単位照合、大規模データの整合性確認、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開は未確認のまま。MacroPilot MVPは未完成。
