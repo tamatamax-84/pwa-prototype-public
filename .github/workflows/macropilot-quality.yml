@@ -23,8 +23,12 @@ jobs:
           node --check app.js
           node --check nutrition-core.js
           node --check nutrition.test.js
+          node --check sw.js
+          node --check pwa.test.js
       - name: Nutrition and backup validation tests
-        run: node nutrition.test.js
+        run: |
+          node nutrition.test.js
+          node pwa.test.js
       - name: JSON validation
         run: |
           node -e "JSON.parse(require('fs').readFileSync('manifest.json','utf8'))"
