@@ -398,5 +398,255 @@
       ],
       "secondaryCheck": "NOT_CHECKED"
     }
+  },
+  {
+    "id": "egg_whole_raw",
+    "name": "卵（鶏卵・全卵・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 142,
+      "proteinG": 12.2,
+      "carbohydrateG": 0.4,
+      "fatG": 10.2
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/12004/",
+      "foodNumber": "12004",
+      "foodState": "鶏卵・全卵・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/12004/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "milk_whole",
+    "name": "牛乳（普通牛乳）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 61,
+      "proteinG": 3.3,
+      "carbohydrateG": 4.8,
+      "fatG": 3.8
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/13003/",
+      "foodNumber": "13003",
+      "foodState": "普通牛乳・液状",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/13003/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "salmon_white_raw",
+    "name": "鮭（しろさけ・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 124,
+      "proteinG": 22.3,
+      "carbohydrateG": 0.1,
+      "fatG": 4.1
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/10134/",
+      "foodNumber": "10134",
+      "foodState": "しろさけ・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/10134/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "mackerel_raw",
+    "name": "さば（まさば・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 211,
+      "proteinG": 20.6,
+      "carbohydrateG": 0.3,
+      "fatG": 16.8
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/10154/",
+      "foodNumber": "10154",
+      "foodState": "まさば・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/10154/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "tomato_raw",
+    "name": "トマト（生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 20,
+      "proteinG": 0.7,
+      "carbohydrateG": 4.7,
+      "fatG": 0.1
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06182/",
+      "foodNumber": "06182",
+      "foodState": "赤色トマト・果実・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06182/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "carrot_peeled_raw",
+    "name": "にんじん（皮なし・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 32,
+      "proteinG": 0.7,
+      "carbohydrateG": 8.8,
+      "fatG": 0.2
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06214/",
+      "foodNumber": "06214",
+      "foodState": "にんじん・根・皮なし・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06214/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "cabbage_raw",
+    "name": "キャベツ（生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 23,
+      "proteinG": 1.2,
+      "carbohydrateG": 5.2,
+      "fatG": 0.1
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06061/",
+      "foodNumber": "06061",
+      "foodState": "キャベツ・結球葉・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06061/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "chicken_thigh_skinless_raw",
+    "name": "鶏もも肉（皮なし・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 113,
+      "proteinG": 19,
+      "carbohydrateG": 0,
+      "fatG": 5
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/11224/",
+      "foodNumber": "11224",
+      "foodState": "若どり・もも・皮なし・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/11224/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "plain_yogurt_unsweetened",
+    "name": "プレーンヨーグルト（全脂・無糖）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 56,
+      "proteinG": 3.6,
+      "carbohydrateG": 4.9,
+      "fatG": 3
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/13025/",
+      "foodNumber": "13025",
+      "foodState": "ヨーグルト・全脂無糖",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/13025/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "ginger_peeled_raw",
+    "name": "しょうが（皮なし・生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 28,
+      "proteinG": 0.9,
+      "carbohydrateG": 6.6,
+      "fatG": 0.3
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "Relife Diet secondary page citing Japanese Food Composition Tables (official individual page not independently checked)",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06103/",
+      "foodNumber": "06103",
+      "foodState": "しょうが・根茎・皮なし・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06103/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
   }
 ]
