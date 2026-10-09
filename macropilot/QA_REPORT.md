@@ -254,3 +254,9 @@
 - **QAレポートcommitのActions**：この追記commit `e4985308054a66af1ba65d2f291aa4ba8ebd6509` の [Run #38001545451](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001545451) は `completed / success`。job `validate`（ID `114060534590`）およびJavaScript syntax、Nutrition and backup validation tests、JSON validation、post setup-node、post checkout、Complete jobの全stepが成功。
 - **食品状態と競合値**：普通うんしゅうみかん（07029）と早生うんしゅうみかん（07028）は出典で異なる食品番号・状態として掲載され、値が異なる。別状態として扱い、普通のレコードに早生の値を混ぜていない。同一状態の複数ソース照合はまだ実施していないため、未解決の出典競合はUNKNOWNとして扱う。
 - **データ現状**：38件、公式個別ページ照合済み2件、未検証二次情報36件。追加4件はすべて `SECONDARY_SOURCE_UNVERIFIED` のまま。MVPは未完成。
+
+
+## 38食品バッチの追跡再確認（2026-10-10）
+- **PASS**：直前のQAレポート更新commit `bf3ff0cf29bb66a4ccecb64a8dfde25b2b1439fb` の [Run #38001620662](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001620662) は再確認時点で `completed / success`。job `validate`（ID `114060781938`）のSet up job、Checkout、Setup Node.js、JavaScript syntaxはsuccess。Nutrition and backup validation tests、JSON validation、後処理もsuccessとなり、run本体の最終結論を確認。
+- **未確定のまま追跡継続**：テスト更新commit `b64ce2a2acbedd813cced73c5f1a62380ebbda1c` の [Run #38001526568](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001526568) はGitHub APIの複数回照会で `in_progress` のまま、job `validate`（ID `114060472858`）はNutrition and backup validation testsで停止した表示が続き、後続stepはpending。run/jobログの取得は `404 BlobNotFound` で利用不可。現時点で成功・失敗いずれも断定しない。データcommitの失敗原因（旧件数34、実データ38）はログで特定済みで、テストcommitでは期待件数38と4件の栄養値アサーションを追加済み。
+- **データ現状と完成判定**：38件、公式個別ページ照合済み2件、未検証二次情報36件。追加4件の未検証ステータスを維持。未解決ゲートが残るためMacroPilot MVPは未完成。main、baseline/pwa-foundation-v1.0、Canonical OSリポジトリは変更していない。
