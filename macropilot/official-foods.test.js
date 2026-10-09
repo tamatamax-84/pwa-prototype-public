@@ -71,6 +71,14 @@ const expectedSecondary = {
   chicken_thigh_skinless_raw: {number:'11224', energyKcal:113, proteinG:19.0, carbohydrateG:0, fatG:5.0, url:'https://diet.relifeinc.jp/food/11224/'},
   plain_yogurt_unsweetened: {number:'13025', energyKcal:56, proteinG:3.6, carbohydrateG:4.9, fatG:3.0, url:'https://diet.relifeinc.jp/food/13025/'},
   ginger_peeled_raw: {number:'06103', energyKcal:28, proteinG:0.9, carbohydrateG:6.6, fatG:0.3, url:'https://diet.relifeinc.jp/food/06103/'},
+
+  tomato_can_whole_unsalted: {number:'06184', energyKcal:21, proteinG:0.9, carbohydrateG:4.4, fatG:0.2, url:'https://diet.relifeinc.jp/food/06184/'},
+  ham_boneless: {number:'11175', energyKcal:115, proteinG:18.7, carbohydrateG:1.8, fatG:4.0, url:'https://diet.relifeinc.jp/food/11175/'},
+  ham_loin: {number:'11176', energyKcal:211, proteinG:18.6, carbohydrateG:2.0, fatG:14.5, url:'https://diet.relifeinc.jp/food/11176/'},
+  process_cheese: {number:'13040', energyKcal:313, proteinG:22.7, carbohydrateG:1.3, fatG:26.0, url:'https://diet.relifeinc.jp/food/13040/'},
+  bread_white: {number:'01026', energyKcal:248, proteinG:8.9, carbohydrateG:46.4, fatG:4.1, url:'https://diet.relifeinc.jp/food/01026/'},
+  pancake_mix: {number:'01024', energyKcal:360, proteinG:7.8, carbohydrateG:74.4, fatG:4.0, url:'https://diet.relifeinc.jp/food/01024/'},
+  spring_roll_wrapper_raw: {number:'01179', energyKcal:288, proteinG:8.3, carbohydrateG:62.2, fatG:1.6, url:'https://diet.relifeinc.jp/food/01179/'},
 };
 for (const [id, expected] of Object.entries(expectedSecondary)) {
   const food = foods.find(f => f.id === id);
@@ -82,5 +90,5 @@ for (const [id, expected] of Object.entries(expectedSecondary)) {
   assert.equal(food.provenance.errataStatus,'NOT_ROW_CHECKED');
   assert.equal(food.provenance.secondaryCheck,'NOT_CHECKED');
 }
-assert.equal(foods.length,26,'expected two official-page-checked records plus twenty-four secondary-source records');
-console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 24 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
+assert.equal(foods.length,33,'expected two official-page-checked records plus thirty-one secondary-source records');
+console.log('PASS: ' + foods.length + ' food records validated; 2 official-page-checked records and 31 explicitly unverified secondary-source records, with exact nutrients/provenance and no false verification status');
