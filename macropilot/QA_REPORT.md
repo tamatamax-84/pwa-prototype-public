@@ -265,3 +265,10 @@
 ## 38食品テストrunの完了確定（2026-10-10）
 - **PASS**：テスト更新commit `b64ce2a2acbedd813cced73c5f1a62380ebbda1c` の [Run #38001526568](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001526568) は最終再照会で `completed / success`。job `validate`（ID `114060472858`）およびSet up job、Checkout、Setup Node.js、JavaScript syntax、Nutrition and backup validation tests、JSON validation、post setup-node、post checkout、Complete jobの全stepがsuccess。初期の長時間 `in_progress` 表示は解消。
 - **最新QAレポートcommitのCI**：直前のQA更新commit `196dff7c3c07550fd65ab2bc43c5763fe9b5bc91` の [Run #38001706427](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001706427) は最終照会時点で `in_progress`。job `validate`（ID `114061064291`）はNutrition and backup validation testsを実行中、JSON validationと後処理はpending。run本体がcompletedになるまで最終結論は未確定として扱う。
+
+
+## QAレポートCI最終状態の訂正（2026-10-10）
+- 前項で `in_progress` と記録した `196dff7c3c07550fd65ab2bc43c5763fe9b5bc91` の [Run #38001706427](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001706427) は、再確認時に `completed / success`。job `validate`（ID `114061064291`）およびJavaScript syntax、Nutrition and backup validation tests、JSON validation、全後処理stepがsuccess。
+- この訂正追記前のQAレポートcommit `c101e698dd726105d7f4d1bab51dd9b77d94eafd` の [Run #38001750433](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/38001750433) も `completed / success`。job `validate`（ID `114061207591`）および全step成功。
+- **38食品バッチのCI結論**：データcommit `2ea2ac31b6034a1273deeb726eb0278a1ee1139f` は旧件数期待値34で失敗（Run #38001512054）。テストcommit `b64ce2a2acbedd813cced73c5f1a62380ebbda1c` で期待件数38と4件の値を追加し、Run #38001526568は `completed / success`。QAレポートcommit `e4985308054a66af1ba65d2f291aa4ba8ebd6509`（Run #38001545451）、`bf3ff0cf29bb66a4ccecb64a8dfde25b2b1439fb`（Run #38001620662）、`196dff7c3c07550fd65ab2bc43c5763fe9b5bc91`（Run #38001706427）、`c101e698dd726105d7f4d1bab51dd9b77d94eafd`（Run #38001750433）はいずれもcompleted/success。
+- 失敗Run #38001512054の履歴はRecovery記録として維持。現行38件データ・テストのCIは成功しているが、食品状態の複数ソース照合、正誤表行単位照合、公式CSV、実機・公開確認などのゲートは未解決であり、MacroPilot MVPは未完成。
