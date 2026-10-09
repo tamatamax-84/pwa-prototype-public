@@ -133,3 +133,17 @@
 - **QAレポート更新commitのCI**：本追記の直前のレポート更新commit `f7a108476e3abe24048afbdb2954941563b26edc` のRun [#37970432894](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37970432894) は最終確認時点で `in_progress`。JavaScript syntaxは成功、Nutrition and backup validation testsは実行中、JSON validationは未開始。ジョブログ取得は `BlobNotFound` で失敗し、ログ本文は確認できない。完了結果が得られるまでは当該レポート更新をCI PASSと扱わない。
 - **次の追跡対象**：本追記によって新しいcommitとActions runが作成されるため、当該更新commitのrunを別途追跡し、完了・結論を確認する。
 - **ゲート状況**：2食品の登録済み4栄養値は公式個別ページと一致し、該当する自動テストは成功。正誤表の行単位照合、CSV実取得、全食品網羅性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開は未解決。MacroPilot MVPは未完成。
+## 食品データ拡充（2026-10-10・二次情報を許容した初回バッチ）
+- **データ件数：2件 → 9件（+7件）**。今回追加した7件は二次情報サイト Relife Diet の個別ページに記載された日本食品標準成分表（八訂）増補2023年由来の食品番号・100gあたり主要栄養値を転記した。個人ブログ等も今後の候補ソースとするが、出典品質を混同しないため、今回のデータは `SECONDARY_SOURCE_UNVERIFIED` として追加した。
+- **新規追加レコード**：
+  - `tofu_momen` 木綿豆腐・食品番号04032：73 kcal / P 7.0g / C 1.5g / F 4.9g。出典 https://diet.relifeinc.jp/food/04032/
+  - `natto` 納豆（糸引き納豆）・食品番号04046：184 kcal / P 16.5g / C 12.1g / F 10.0g。出典 https://diet.relifeinc.jp/food/04046/
+  - `broccoli_raw` ブロッコリー（生）・食品番号06263：37 kcal / P 5.4g / C 6.6g / F 0.6g。出典 https://diet.relifeinc.jp/food/06263/
+  - `tuna_water_canned` ツナ缶（まぐろ・水煮フレーク・ライト）・食品番号10260：70 kcal / P 16.0g / C 0.2g / F 0.7g。出典 https://diet.relifeinc.jp/food/10260/
+  - `sweet_potato_steamed_peeled` さつまいも（皮なし・蒸し）・食品番号02007：131 kcal / P 1.2g / C 31.9g / F 0.2g。出典 https://diet.relifeinc.jp/food/02007/
+  - `soy_milk_unadjusted` 豆乳（無調整）・食品番号04052：43 kcal / P 3.6g / C 2.3g / F 2.8g。出典 https://diet.relifeinc.jp/food/04052/
+  - `soybean_dry_domestic` 大豆（国産・乾）・食品番号04023：372 kcal / P 33.8g / C 29.5g / F 19.7g。出典 https://diet.relifeinc.jp/food/04023/
+- **データの使い分け**：既存の `rice` と `chicken` は公式個別ページ照合済み。新規7件は二次情報の記載を取得したが、文部科学省の公式個別ページと食品状態・栄養値の独立照合は未実施。したがって公式照合済み件数には算入しない。全9件の正誤表行単位照合は未実施。
+- **スキーマとテストの変更**：`food-data.schema.json` に `SECONDARY_SOURCE_UNVERIFIED` を追加。`official-foods.test.js` は二次情報レコードの出典URL・食品番号・4栄養値・未照合ステータスを検証し、未確認データが公式照合済みとして扱われないことを確認する。データ件数は9件、うち公式個別ページ照合済み2件、二次情報のみ7件。
+- **更新commit**：食品データ `d7b76128a51c7fef95f02178c471e526f688da78`、スキーマ `0a1c632522dc15ffe4bd1809f587c938b42a3f34`、食品テスト `9068f6c281a0313e76be30745343de2e2190de55`。それぞれのGitHub Actionsを追跡し、完了するまではCI PASSを宣言しない。
+- **残存ゲート**：正誤表行単位照合、公式CSV取得、全データセットの網羅性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰・再接続、HTTPS公開。MacroPilot MVPは未完成。
