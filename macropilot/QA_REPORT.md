@@ -84,3 +84,11 @@
 - **CI**：本更新により新しいGitHub Actions runが複数起動している。最終の `feature/macropilot-mvp` HEADに対応するrunを完了まで追跡し、成功・失敗の実測結果を下記に追記する。結果が出るまでは今回のコード変更全体をCI PASSと判定しない。
 - **未実施のまま**：CSV実取得・解析、2026年3月27日付正誤表の行単位照合、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開。
 - **保護境界**：変更先は `feature/macropilot-mvp` 内のみ。`main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更していない。MacroPilot MVPは未完成。
+
+
+## 追加検証（2026-10-10・食品データ統合後CI完了）
+- **PASS**：統合後のcommit `15a46dc309f51eb456a66c35ef08d5edf1807fe4` に対するRun [37968667795](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37968667795) は `completed / success`。全ステップ成功：JavaScript syntax、Nutrition and backup validation tests（nutrition、PWA、食品データ検証、Playwright Chromiumブラウザ統合）、JSON validation、後処理。
+- **回復記録**：途中commit `d65fee0...` と `0552d7c...` のCIでは、PWAテストにリテラルの `\\n` が混入してJavaScript構文検査が失敗。ログから原因を特定し、`pwa.test.js` の不正な文字列を除去。修正後のrun [37968605467](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37968605467) は成功し、さらに最終統合commitのrun [37968667795](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37968667795) も全工程成功を確認。
+- **機能QAの範囲**：CIのPlaywright Chromiumテストは目標保存、食事追加・削除、日付切替、バックアップ、Service Workerによるオフラインシェル、オンライン復帰をPASS。これは自動Chromium試験であり、iPhone実機のSafari・ホーム画面追加・実機オフライン復帰のPASSではない。
+- **残課題**：CSV実取得・解析、2026年3月27日付正誤表の行単位照合、大規模食品データ収集と整合性QA、iPhone実機Safari、ホーム画面追加、実機オフライン復帰／再接続、HTTPS公開は未実施／未確認。したがってMacroPilot MVPは未完成。
+- **保護境界**：変更は `feature/macropilot-mvp` 内のみ。 `main`、`baseline/pwa-foundation-v1.0)、Canonical OSリポジトリは変更していない。
