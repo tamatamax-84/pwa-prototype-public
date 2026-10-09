@@ -54,3 +54,12 @@
   - 文部科学省の公表ページでは2026年3月27日付正誤表が案内されている（https://www.mext.go.jp/a_menu/syokuhinseibun/mext_00001.html）。正誤表ファイル自体の取得・解析は今回も未実施のため、今回の民間サイト照合は当該正誤表の全行確認を代替しない。
 - **実機・公開ゲート**：iPhone実機Safari、ホーム画面追加、実機オフライン起動・復帰・再接続、HTTPS公開の状態は引き続き**未実施／未確認**。自動Chromiumテスト結果から実機PASSを推定しない。
 - **保護境界**：今回の書き込み先は `feature/macropilot-mvp` のみ。 `main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更対象にしていない。MacroPilot MVPは未解決ゲートが残るため**未完成**のまま。
+
+
+## 追加検証（2026-10-10・Run #37967246151完了／CSV取得経路の再評価）
+- **PASS**：commit `e38967c1350600f59385912001cb41d64eddaab0` のGitHub Actions run [37967246151](https://github.com/tamatamax-84/pwa-prototype-public/actions/runs/37967246151) は `completed / success`。ジョブ `validate` が成功し、JavaScript syntax、Nutrition and backup validation tests、JSON validation、およびセットアップ・後処理の各ステップもすべて成功。失敗ステップはなく、修正・再実行は不要。
+- **CSV取得の障害箇所を再評価**：公式検索トップ（https://fooddb.mext.go.jp/search.html）から「フリーワードで検索」へ移動すると、検索フォームは `/freeword/fword_top.pl` 内のiframeとして表示される。検索結果ページのCSVダウンロードは検索結果画面の操作機能として説明されている（公式ヘルプ：https://fooddb.mext.go.jp/help/help_r.html）。したがって、単純に検索ページURLを開くだけではCSV URLを得られず、(1) iframe内フォームへの入力、(2) フォーム送信による検索結果セッション／結果画面の生成、(3) 結果画面のCSVダウンロード操作、というブラウザ操作列が必要。今回の取得環境ではiframe内フォームを実操作してPOST/セッションを生成し、ダウンロード操作まで実行するブラウザ機能がなく、ここが実取得のブロッカー。CSVの直接URLやパラメータを推測して呼び出す方法は、未確認のエンドポイントを捏造することになるため採用しない。
+- **代替の次善策**：対象食品の公式個別詳細ページを直接参照し、食品番号・食品状態・栄養値を公式表示と照合する。独立した補助確認として民間サイトRelife Diet（https://diet.relifeinc.jp/food/01088/、https://diet.relifeinc.jp/food/11288/）の食品番号と栄養値も比較した。両サイト値は一致したが、二次情報であり、CSVデータの代替取得や正誤表全行照合の完了とはみなさない。
+- **今回のCSV実データ取得結果**：未取得。CSVダウンロード機能の存在と操作構造は公式ヘルプ／検索画面で確認したが、CSVファイル自体をダウンロード・解析できていないため、CSVからの行単位照合は未実施。
+- **未解決ゲート**：2026年3月27日付正誤表のファイル取得・行単位照合、iPhone実機Safari、ホーム画面追加、実機オフライン起動・復帰・再接続、HTTPS公開は未実施／未確認。MacroPilot MVPは完成扱いにしない。
+- **保護境界**：今回の更新は `feature/macropilot-mvp` の `macropilot/QA_REPORT.md` のみ。`main`、`baseline/pwa-foundation-v1.0`、Canonical OSリポジトリは変更していない。
