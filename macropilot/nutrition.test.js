@@ -17,4 +17,4 @@ N.addLog(state,{id:'a',food:'rice',amount:150,meal:'朝食'},'2026-10-09');asser
 assert.equal(N.removeLog(state,'a'),1);assert.equal(state.logs.length,0);
 N.addLog(state,{id:'b',food:'rice',amount:150,meal:'朝食'},'2026-10-09');assert.equal(N.rollover(state,'2026-10-10'),true);assert.equal(state.logs.length,0);assert.equal(N.rollover(state,'2026-10-10'),false);
 assert.equal(N.setGoals(state,{type:'cut',kcal:1900,p:150,c:180,f:55}),true);assert.equal(state.goals.configured,true);assert.equal(state.goals.kcal,1900);assert.equal(N.setGoals(state,{type:'oops',kcal:1,p:1,c:1,f:1}),false);
-console.log('PASS: 16 assertions covering scaling, totals, target remainder, add/delete, date rollover, goal validation, and backup validation');
+console.log('PASS: 19 assertions covering scaling, totals, target remainder, add/delete, date rollover, goal validation, and backup validation');
