@@ -48,5 +48,180 @@
       ],
       "secondaryCheck": "FOOD_NUMBER_STATE_AND_CORE_NUTRIENTS_MATCH"
     }
+  },
+  {
+    "id": "tofu_momen",
+    "name": "木綿豆腐",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 73,
+      "proteinG": 7,
+      "carbohydrateG": 1.5,
+      "fatG": 4.9
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/04032/",
+      "foodNumber": "04032",
+      "foodState": "木綿豆腐・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/04032/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "natto",
+    "name": "納豆（糸引き納豆）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 184,
+      "proteinG": 16.5,
+      "carbohydrateG": 12.1,
+      "fatG": 10
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/04046/",
+      "foodNumber": "04046",
+      "foodState": "糸引き納豆",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/04046/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "broccoli_raw",
+    "name": "ブロッコリー（生）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 37,
+      "proteinG": 5.4,
+      "carbohydrateG": 6.6,
+      "fatG": 0.6
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/06263/",
+      "foodNumber": "06263",
+      "foodState": "花序・生",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/06263/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "tuna_water_canned",
+    "name": "ツナ缶（まぐろ・水煮フレーク・ライト）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 70,
+      "proteinG": 16,
+      "carbohydrateG": 0.2,
+      "fatG": 0.7
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/10260/",
+      "foodNumber": "10260",
+      "foodState": "まぐろ類・缶詰・水煮・フレーク・ライト（液汁を含む）",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/10260/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "sweet_potato_steamed_peeled",
+    "name": "さつまいも（皮なし・蒸し）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 131,
+      "proteinG": 1.2,
+      "carbohydrateG": 31.9,
+      "fatG": 0.2
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/02007/",
+      "foodNumber": "02007",
+      "foodState": "さつまいも・塊根・皮なし・蒸し",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/02007/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "soy_milk_unadjusted",
+    "name": "豆乳（無調整）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 43,
+      "proteinG": 3.6,
+      "carbohydrateG": 2.3,
+      "fatG": 2.8
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/04052/",
+      "foodNumber": "04052",
+      "foodState": "大豆・豆乳・無調整",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/04052/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
+  },
+  {
+    "id": "soybean_dry_domestic",
+    "name": "大豆（国産・乾）",
+    "unit": "g",
+    "base": 100,
+    "nutrients": {
+      "energyKcal": 372,
+      "proteinG": 33.8,
+      "carbohydrateG": 29.5,
+      "fatG": 19.7
+    },
+    "provenance": {
+      "status": "SECONDARY_SOURCE_UNVERIFIED",
+      "edition": "日本食品標準成分表（八訂）増補2023年を参照すると記載する二次情報ページ（公式個別ページ未照合）",
+      "sourceUrl": "https://diet.relifeinc.jp/food/04023/",
+      "foodNumber": "04023",
+      "foodState": "大豆・国産・乾",
+      "verifiedAt": "2026-10-10",
+      "errataStatus": "NOT_ROW_CHECKED",
+      "secondarySources": [
+        "https://diet.relifeinc.jp/food/04023/"
+      ],
+      "secondaryCheck": "NOT_CHECKED"
+    }
   }
 ]
